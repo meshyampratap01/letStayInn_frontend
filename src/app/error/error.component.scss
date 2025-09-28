@@ -1,0 +1,41 @@
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: $background;
+  color: $text;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
+.error-content {
+  text-align: center;
+  padding: 32px;
+  background: #fff;
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: $primary;
+}
+
+.error-message {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+}
+
+.error-home-link {
+  font-size: 1rem;
+  color: $primary;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+    color: darken($primary, 10%);
+    cursor: pointer;
+  }
+}

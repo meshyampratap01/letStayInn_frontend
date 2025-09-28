@@ -3,9 +3,13 @@ export type loginRequest={
     password:string
 }
 
-export type loginResponse={
-    token:string
-}
+export type loginResponse = {
+    code: number;
+    message: string;
+    data: {
+        token: string;
+    };
+};
 
 export type payload = {
     id:string,

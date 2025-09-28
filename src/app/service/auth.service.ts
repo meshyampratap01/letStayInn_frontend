@@ -25,7 +25,7 @@ export class AuthService {
       .post<loginResponse>(url, { email, password })
       .pipe(
         tap((response) => {
-          const user = this.decodeJWT(response.token);
+          const user = this.decodeJWT(response.data.token);
           this.user.set(user);
           localStorage.setItem('user', JSON.stringify(user));
         }),
