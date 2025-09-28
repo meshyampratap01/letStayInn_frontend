@@ -10,11 +10,11 @@
 		<form (ngSubmit)="login()">
 			<div class="login-field">
 				<span class="login-field-icon"><i class="material-icons">mail_outline</i></span>
-				<input type="email" placeholder="Your Email" class="login-input" [(ngModel)]='email'/>
+				<input type="email" placeholder="Your Email" class="login-input" [(ngModel)]='email' name="email"/>
 			</div>
 			<div class="login-field">
 				<span class="login-field-icon"><i class="material-icons">lock_outline</i></span>
-				<input type="password" placeholder="Password" class="login-input" [(ngModel)]='password' />
+				<input type="password" placeholder="Password" class="login-input" [(ngModel)]='password' name="password" />
 			</div>
 			<button type="submit" class="login-btn">Login</button>
 		</form>
