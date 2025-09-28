@@ -1,8 +1,3 @@
-export type loginRequest={
-    email:string,
-    password:string
-}
-
 export type loginResponse = {
     code: number;
     message: string;
