@@ -20,6 +20,25 @@ export class LoginComponent {
   private router = inject(Router);
 
   login(){
-    
+    const loginSubscription = this.authServcie.login(this.email, this.password).subscribe({
+      next: () => {
+        if (this.authServcie.user()?.Role === 4) {
+          this.router.navigate(['/admin']);
+        } else if (this.authServcie.user()?.Role === 2) {
+          this.router.navigate(['/kitchen']);
+        } else if (this.authServcie.user()?.Role === 3) {
+          this.router.navigate(['/cleaning']);
+        } else {
+          this.router.navigate(['/welcome']);
+        }
+      },
+      error: (err) => {
+        console.error('Login error', err);
+      },
+      complete: () => {
+        console.log('Login complete');
+      }
+    });
   }
+
 }
