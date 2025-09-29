@@ -1,22 +1,31 @@
 <div class="login-container">
 	<div class="login-left">
-			<a class="login-back" routerLink="/">
-				<span class="login-back-arrow">&#8592;</span> Back
-			</a>
-			<img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hotel" class="login-hotel-img"/>
+		<a class="login-back" routerLink="/">
+			<span class="login-back-arrow">&#8592;</span> Back
+		</a>
+		<img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+			alt="Hotel" class="login-hotel-img" />
 	</div>
-	<div class="login-right">
+	<div [class]="'login-right'">
 		<h2 class="login-title">Login</h2>
-		<form (ngSubmit)="login()">
+		<form (ngSubmit)="login(form)" #form>
 			<div class="login-field">
 				<span class="login-field-icon"><i class="material-icons">mail_outline</i></span>
-				<input type="email" placeholder="Your Email" class="login-input" [(ngModel)]='email' name="email"/>
+				<input type="email" class="login-input" id="login-input" required email placeholder="Email Address" [(ngModel)]='email'
+					name="email" (click)="inputClicked()" />
 			</div>
 			<div class="login-field">
 				<span class="login-field-icon"><i class="material-icons">lock_outline</i></span>
-				<input type="password" placeholder="Password" class="login-input" [(ngModel)]='password' name="password" />
+				<input type="password" placeholder="Password" class="login-input" required minlength="8" [(ngModel)]='password' name="password"
+					(click)="inputClicked()"/>
 			</div>
-			<button type="submit" class="login-btn">Login</button>
+			<button type="submit" [disabled]="loginClicked()" class="login-btn">
+				@if(loginClicked()){
+				<span>Logging In Please Wait....</span>
+				} @else {
+				<span>LOGIN</span>
+				}
+			</button>
 		</form>
 		<div class="login-link">
 			<a>Don't have an account? <span routerLink="/signup">Sign up</span></a>

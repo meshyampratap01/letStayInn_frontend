@@ -146,6 +146,7 @@ $border-radius: 16px;
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 32px;
+  margin-top: 32px;
   color: $text;
 }
 
@@ -205,20 +206,19 @@ form {
 .signup-link {
   margin-top: 24px;
   text-align: center;
-  a {
+  span{
+    color: $primary;
+    font-weight: 500;
+  }
+  a{
     color: $primary;
     // text-decoration: underline;
     font-size: 1rem;
     font-weight: 500;
+    &:hover{
+      color: darken($primary,10%);
+    }
   }
-    span {
-        // text-decoration: underline;
-        cursor: pointer;
-    }
-    span:hover {
-      cursor: pointer;
-      color: darken($primary, 10%);
-    }
 }
 
 @media (max-width: 900px) {

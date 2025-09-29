@@ -13,6 +13,18 @@ $border-radius: 16px;
     overflow: hidden;
 }
 
+.for-label{
+  margin-left: 30px;
+  transition: all 0.2s ease;
+  font-weight: lighter;
+  // margin-bottom: 15px;
+  // font-weight: 100;
+
+  &::after{
+  font-weight: lighter;
+  }
+}
+
 // .login-left {
 //   flex: 1;
 //   display: flex;
@@ -142,6 +154,7 @@ $border-radius: 16px;
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 32px;
+  margin-top: 32px;
   color: $text;
 }
 
@@ -210,6 +223,12 @@ form {
   span {
     text-decoration: underline;
     cursor: pointer;
+
+    &:hover{
+      color: darken($primary,10%);
+      // z-index: ;
+      // transform: scale(1.1);
+    }
   }
 }
 

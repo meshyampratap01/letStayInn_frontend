@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { User } from '../models/user';
+import { Roles, User } from '../models/user';
 import { loginResponse, payload } from '../models/login';
 import { catchError, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -25,31 +26,52 @@ export class AuthService {
       .post<loginResponse>(url, { email, password })
       .pipe(
         tap((response) => {
-          const user = this.decodeJWT(response.data.token);
-          this.user.set(user);
-          localStorage.setItem('user', JSON.stringify(user));
+          const newUser = this.decodeJWT(response.data.token);
+          this.user.set(newUser);
+          localStorage.setItem('token',JSON.stringify(response.data.token))
+          localStorage.setItem('user', JSON.stringify(newUser));
         }),
-        catchError((error) => {
-          console.error('Login failed', error);
-          throw error;
-        })
+        // catchError((error) => {
+        //   console.error('Login failed', error);
+        //   throw error;
+        // })
       );
   }
   private decodeJWT(token: string): User {
-    const payloadBase64 = token.split('.')[1];
-    const payloadJson = atob(payloadBase64);
-    const payload: payload = JSON.parse(payloadJson);
-    return {
-      ID: payload.id,
-      UserName: payload.name,
-      Role:
-        payload.role === 'admin'
-          ? 4
-          : payload.role === 'kitchenstaff'
-          ? 2
-          : payload.role === 'cleaningstaff'
-          ? 3
-          : 1,
-    };
+    try{
+      const payload = jwtDecode<payload>(token);
+      return {
+        ID: payload.user_id,
+        UserName: payload.username,
+        Role: 
+        payload.role === 'Manager'
+        ? 4
+        : payload.role === 'KitchenStaff'
+        ? 2
+        :payload.role === 'CleaningStaff'
+        ? 3
+        : 1,
+      };
+    } catch (err){
+      console.error('Invalid JWT',err);
+      return {ID: '', UserName: '', Role:0};
+    }
+  }
+
+  isloggedin():boolean{
+    const prevUser = localStorage.getItem('user');
+    if (prevUser!=null){
+      return true;
+    }
+    return false;
+  }
+
+  isAdmin():boolean{
+    const token = localStorage.getItem('token') as string;
+    const currUser = this.decodeJWT(token);
+    if (currUser.Role===4){
+      return true;
+    }
+    return false;
   }
 }

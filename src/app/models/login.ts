@@ -7,7 +7,7 @@ export type loginResponse = {
 };
 
 export type payload = {
-    id:string,
-    name:string,
+    user_id:string,
+    username:string,
     role:string
 }

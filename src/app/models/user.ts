@@ -1,4 +1,5 @@
 export enum Roles {
+  Invalid = 0,
   GUEST = 1,
   KITCHENSTAFF = 2,
   CLEANINGSTAFF = 3,

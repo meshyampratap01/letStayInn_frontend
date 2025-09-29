@@ -5,6 +5,9 @@ import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import { AdminComponent } from './dashboard/admin/admin.component';
 import { GuestComponent } from './dashboard/guest/guest.component';
+import { authGuard } from './guard/auth.guard';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { adminGuard } from './guard/admin.guard';
 
 export const routes: Routes = [
   {
@@ -23,10 +26,20 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [authGuard, adminGuard]
   },
   {
     path: 'guest',
     component: GuestComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'logout',
+    component: LoginComponent,
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
   },
   {
     path: '**',
