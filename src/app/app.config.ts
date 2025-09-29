@@ -7,11 +7,12 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 // import { AddJwtInterceptor } from './interceptors/jwt.add';
 import { loggingInterceptor } from './interceptors/logging.interceptor';
+import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([loggingInterceptor])),
+    provideHttpClient(withInterceptors([BaseUrlInterceptor,loggingInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
   ],

@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    const url = 'http://localhost:8080/api/v1/login';
+    const url = 'login';
     return this.httpClient
       .post<loginResponse>(url, { email, password })
       .pipe(
