@@ -7,9 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
-// import { MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-// import { subscribeOn, Subscription } from 'rxjs';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,9 @@ import { ButtonModule } from 'primeng/button';
     MessageModule,
     ToastModule,
     ButtonModule,
+    ProgressBarModule,
   ],
+  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -33,47 +35,54 @@ export class LoginComponent {
 
   loginClicked = signal(false);
 
-  private authServcie = inject(AuthService);
-  // private messageService = inject(MessageService);
+  private authService = inject(AuthService);
+  private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
 
   login(form: HTMLFormElement) {
     this.loginClicked.set(true);
-    // setTimeout(() => {
 
-    // }, 4000);
+    const roleRouteMap: { [key: number]: string } = {
+      4: '/admin',
+      2: '/kitchen',
+      3: '/cleaning',
+      1: '/guest',
+      0: '/login',
+    };
 
-    const loginSubscription = this.authServcie
+    const loginSubscription = this.authService
       .login(this.email, this.password)
       .subscribe({
         next: () => {
-          if (this.authServcie.user()?.Role === 4) {
-            this.router.navigate(['/admin']);
-          } else if (this.authServcie.user()?.Role === 2) {
-            this.router.navigate(['/kitchen']);
-          } else if (this.authServcie.user()?.Role === 3) {
-            this.router.navigate(['/cleaning']);
-          } else {
-            this.router.navigate(['/guest']);
-          }
-          // this.router.navigate(['/admin']);
+          const user = this.authService.user();
+          const userRole = user?.Role ?? 0;
+          this.router.navigate([roleRouteMap[userRole]]);
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Login error', err);
           this.isInvalid.set(true);
           this.loginClicked.set(false);
+          this.messageService.add({
+            severity: 'error',
+            closable: true,
+            summary: 'Login Failed',
+            detail: err?.error?.message || 'Invalid credentials or server error',
+            life: 4000
+          });
         },
         complete: () => {
           this.loginClicked.set(false);
           console.log('Login complete');
         },
       });
-      this.destroyRef.onDestroy(()=>{
-        loginSubscription.unsubscribe()
-      });
+    this.destroyRef.onDestroy(() => {
+      if (loginSubscription && typeof loginSubscription.unsubscribe === 'function') {
+        loginSubscription.unsubscribe();
+      }
+    });
 
-      form.reset();
+    form.reset();
   }
 
   inputClicked() {

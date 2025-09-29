@@ -115,6 +115,51 @@ $border-radius: 16px;
   margin-bottom: 32px;
 }
 
+::ng-deep .p-toast {
+  z-index: 9999;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+
+  .p-toast-message {
+    background: $primary;
+    color: #fff;
+    border: none;
+    border-radius: $border-radius;
+    box-shadow: $card-shadow;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+
+    .p-toast-message-content {
+      flex: 1; 
+    }
+
+    .p-toast-summary {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .p-toast-detail {
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+      opacity: 0.9;
+    }
+
+    .p-toast-icon-close {
+      color: #fff;
+      opacity: 0.8;
+      margin-left: 1rem;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+
 .login-icon {
   display: flex;
   align-items: center;

@@ -1,4 +1,5 @@
 <div class="login-container">
+	<p-toast class="p-toast"></p-toast>
 	<div class="login-left">
 		<a class="login-back" routerLink="/">
 			<span class="login-back-arrow">&#8592;</span> Back
@@ -22,6 +23,7 @@
 			<button type="submit" [disabled]="loginClicked()" class="login-btn">
 				@if(loginClicked()){
 				<span>Logging In Please Wait....</span>
+				<!-- <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" /> -->
 				} @else {
 				<span>LOGIN</span>
 				}
