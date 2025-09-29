@@ -5,16 +5,15 @@
 	</div>
 	<div class="user-info">
 		<div class="user-details">
-			<span class="user-name">{{ userName }}</span>
-			<span class="user-role">{{ userRole }}</span>
+			<span class="user-name">{{ userName() }}</span>
+			<span class="user-role">{{ userRole() }}</span>
 		</div>
 		<div class="user-actions">
-					<div class="user-logo" (click)="goToProfile()" title="Profile">
-						<span class="material-icons user-logo-icon">account_circle</span>
-					</div>
+			<div class="user-logo" (click)="goToProfile()" title="Profile">
+				<span class="material-icons user-logo-icon">account_circle</span>
+			</div>
 			<button class="logout-btn" (click)="logout()" title="Logout">
-				<span class="logout-icon">&#8594;</span>
-			</button>
+				<span class="material-icons logout-icon">logout</span> </button>
 		</div>
 	</div>
 </header>
