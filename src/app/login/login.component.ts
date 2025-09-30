@@ -10,6 +10,9 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +24,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     ToastModule,
     ButtonModule,
     ProgressBarModule,
+    IconFieldModule,
+    InputIconModule,
+    PasswordModule
   ],
   providers: [MessageService],
   templateUrl: './login.component.html',

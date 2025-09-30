@@ -1,10 +1,12 @@
 import { Component, input, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Button } from "primeng/button";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  imports: [Button]
 })
 export class HeaderComponent {
   // @Input() userName: string = '';

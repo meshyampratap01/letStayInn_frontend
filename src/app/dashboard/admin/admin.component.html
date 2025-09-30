@@ -1,1 +1,71 @@
-<app-header [userName]="userName" [userRole]="userRole"></app-header>
+<div class="container">
+  <app-header [userName]="userName" [userRole]="userRole"></app-header>
+
+  <div class="dashboard">
+    <h2 class="title">Manager Dashboard</h2>
+    <p class="subtitle">Welcome back! Here's what's happening at LetStayInn today.</p>
+
+    <div class="card-grid">
+      <p-card class="dashboard-card available">
+        <div class="card-content">
+          <!-- <p-avatar icon="pi pi-bed" shape="circle" styleClass="icon green"></p-avatar> -->
+          <i class="material-icons">bed</i>
+          <div class="details">
+            @if (isRoomLoading()) {
+                <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '20px', height: '20px' }" />
+            } @else {
+                <h3>{{ availableRooms() }}</h3>
+            }
+            <p>Available Rooms</p>
+            <span>Ready for guests</span>
+          </div>
+        </div>
+      </p-card>
+
+      <p-card class="dashboard-card occupied">
+        <div class="card-content">
+          <!-- <p-avatar icon="pi pi-user" shape="square" ></p-avatar> -->
+          <i class="material-icons">hotel</i>
+          <div class="details">
+            @if (isRoomLoading()) {
+                <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '1.5rem', height: '1.5rem', margin:'0'}" />
+            } @else {
+                <h3>{{ occupiedRooms() }}</h3>
+            }
+            <p>Occupied Rooms</p>
+            <span>Currently hosting</span>
+          </div>
+        </div>
+      </p-card>
+
+      <p-card class="dashboard-card pending">
+        <div class="card-content">
+          <!-- <p-avatar icon="pi pi-calendar" shape="circle" styleClass="icon orange"></p-avatar> -->
+          <i class="material-icons">edit_calendar</i>
+          <div class="details">
+            @if (isRoomLoading()) {
+                <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '1.5rem', height: '1.5rem', margin:'0'}" />
+            } @else {
+                <h3>{{ pendingSvcRqst() }}</h3>
+            }
+            <p>Pending Requests</p>
+            <span>Needs attention</span>
+          </div>
+        </div>
+      </p-card>
+
+      <p-card class="dashboard-card rating">
+        <div class="card-content">
+          <!-- <p-avatar icon="pi pi-star" shape="circle" styleClass="icon yellow"></p-avatar> -->
+          <!-- <i class="material-icons" >kid_star</i> -->
+          <i class="material-icons">stars</i>
+          <div class="details">
+            <h3>4.7</h3>
+            <p>Average Rating</p>
+            <span>Guest satisfaction</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

@@ -9,11 +9,12 @@
 			<span class="user-role">{{ userRole() }}</span>
 		</div>
 		<div class="user-actions">
-			<div class="user-logo" (click)="goToProfile()" title="Profile">
-				<span class="material-icons user-logo-icon">account_circle</span>
-			</div>
-			<button class="logout-btn" (click)="logout()" title="Logout">
-				<span class="material-icons logout-icon">logout</span> </button>
+			<p-button label="Profile" (onClick)="goToProfile()" title="Profile" severity="secondary">
+				<i class="pi pi-user" style="font-size: 1.2rem"></i>
+			</p-button>
+			<p-button label="Logout" (onClick)="logout()" [severity]="'danger'">
+				<i class="pi pi-sign-out" title="Logout" (click)="logout()"></i>
+			</p-button>
 		</div>
 	</div>
 </header>

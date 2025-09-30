@@ -1,5 +1,5 @@
+<p-toast></p-toast>
 <div class="login-container">
-	<p-toast class="p-toast"></p-toast>
 	<div class="login-left">
 		<a class="login-back" routerLink="/">
 			<span class="login-back-arrow">&#8592;</span> Back
@@ -12,17 +12,17 @@
 		<form (ngSubmit)="login(form)" #form>
 			<div class="login-field">
 				<span class="login-field-icon"><i class="material-icons">mail_outline</i></span>
-				<input type="email" class="login-input" id="login-input" required email placeholder="Email Address" [(ngModel)]='email'
-					name="email" (click)="inputClicked()" />
+				<input type="email" class="login-input" id="login-input" required email placeholder="Email Address"
+					[(ngModel)]='email' name="email" (click)="inputClicked()" />
 			</div>
 			<div class="login-field">
 				<span class="login-field-icon"><i class="material-icons">lock_outline</i></span>
-				<input type="password" placeholder="Password" class="login-input" required minlength="8" [(ngModel)]='password' name="password"
-					(click)="inputClicked()"/>
+				<input type="password" placeholder="Password" class="login-input" required minlength="8"
+					[(ngModel)]='password' name="password" (click)="inputClicked()" />
 			</div>
 			<button type="submit" [disabled]="loginClicked()" class="login-btn">
 				@if(loginClicked()){
-				<span>Logging In Please Wait....</span>
+				<i class="pi pi-spin pi-spinner" style="font-size: 0.8rem; margin-left: 5px;"></i>
 				<!-- <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" /> -->
 				} @else {
 				<span>LOGIN</span>
