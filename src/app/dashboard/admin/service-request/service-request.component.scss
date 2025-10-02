@@ -1,0 +1,52 @@
+.service-request {
+  padding: 2rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin: 0.2rem 0 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
+  }
+
+  .request-table {
+    width: 100%;
+
+    .status-assigned {
+      color: #5cb85c;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      color: #f0ad4e;
+      font-weight: bold;
+    }
+
+    .status-inprogress {
+      color: #0275d8;
+      font-weight: bold;
+    }
+
+    .status-completed {
+      color: #6c757d;
+      font-weight: bold;
+    }
+
+    .actions {
+      .assign-dropdown {
+        width: 14rem;
+      }
+    }
+  }
+}

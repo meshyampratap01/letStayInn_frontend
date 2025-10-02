@@ -1,0 +1,50 @@
+<div class="service-request">
+    <div class="header">
+        <div>
+            <h2>Service Requests</h2>
+            <p class="subtitle">Manage all service requests from guests</p>
+        </div>
+        <!-- <button pButton type="button" label="+ Add New Request" icon="pi pi-plus" class="add-request-btn"></button> -->
+    </div>
+
+    <p-table [value]="requests()" class="request-table" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Room</th>
+                <th>Status</th>
+                <th>Assigned To</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-request>
+            <tr>
+                <td>{{ request.room_num }}</td>
+                <td>
+                    <span [ngClass]="{
+                        'status-assigned': request.status === 'assigned',
+                        'status-pending': request.status === 'pending',
+                        'status-inprogress': request.status === 'in progress',
+                        'status-completed': request.status === 'completed'
+                    }">
+                        {{ request.status }}
+                    </span>
+                </td>
+                <td>{{ request.assignedTo || 'Unassigned' }}</td>
+                <td>{{ request.created_at | date:'fullTime' }}</td>
+                <td class="actions">
+                    <p-dropdown 
+                        [options]="staffOptions" 
+                        [(ngModel)]="request.assignedTo" 
+                        placeholder="Assign"
+                        (onChange)="assignRequest(request)"
+                        [disabled]="request.status === 'assigned'"
+                        appendTo="body"
+                        class="assign-dropdown">
+                    </p-dropdown>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

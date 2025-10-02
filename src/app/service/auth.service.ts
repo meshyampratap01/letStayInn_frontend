@@ -31,10 +31,6 @@ export class AuthService {
           localStorage.setItem('token',JSON.stringify(response.data.token))
           localStorage.setItem('user', JSON.stringify(newUser));
         }),
-        // catchError((error) => {
-        //   console.error('Login failed', error);
-        //   throw error;
-        // })
       );
   }
   private decodeJWT(token: string): User {

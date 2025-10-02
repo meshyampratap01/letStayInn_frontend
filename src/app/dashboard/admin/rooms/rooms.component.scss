@@ -1,0 +1,199 @@
+$primary-color: #007ad9;
+$secondary-color: #e0e0e0;
+$danger-color: #ef4444;
+$text-color: #333;
+$subtitle-color: #6c757d;
+$background-color: #fdfdfd;
+$border-radius: 8px;
+$input-padding: 0.5rem;
+$font-size: 0.95rem;
+$table-header-bg: #f4f4f4;
+
+.room-management {
+  padding: 2rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin: 0.2rem 0 0;
+      color: #666;
+      font-size: $font-size;
+    }
+
+    .add-room-btn {
+      background-color: $primary-color;
+      color: white;
+      font-weight: 500;
+    }
+  }
+
+  .room-table {
+    width: 100%;
+
+    th {
+      background-color: $table-header-bg;
+      font-weight: 600;
+      padding: 0.75rem;
+    }
+
+    td {
+      padding: 0.75rem;
+      vertical-align: middle;
+    }
+
+    .status-available {
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .status-occupied {
+      background-color: #d9edf7;
+      color: #31708f;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .status-maintenance {
+      background-color: #f2dede;
+      color: #a94442;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .icon-btn {
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: $border-radius;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        i.material-icons {
+          font-size: 20px;
+          // color: $text-color;
+        }
+
+        &:hover {
+          background-color: $secondary-color;
+        }
+      }
+
+      .edit-btn {
+        color: $primary-color;
+      }
+
+      .delete-btn {
+        color: $danger-color;
+      }
+    }
+  }
+}
+
+// Dialog styles
+.custom-dialog-content {
+  padding: 1.5rem;
+  background-color: $background-color;
+  border-radius: $border-radius;
+
+  .dialog-subtitle {
+    display: block;
+    margin-bottom: 1rem;
+    color: $subtitle-color;
+    font-size: $font-size;
+  }
+
+  .dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: $text-color;
+      }
+
+      .custom-input,
+      .custom-input-number,
+      .custom-textarea {
+        width: 100%;
+        padding: $input-padding;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: $font-size;
+      }
+
+      .custom-input-number {
+        ::ng-deep .p-inputtext {
+          width: 100%;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+
+    .btn-primary {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      padding: $input-padding 1rem;
+      border-radius: 4px;
+    }
+
+    .btn-secondary {
+      background-color: $secondary-color;
+      color: $text-color;
+      border: none;
+      padding: $input-padding 1rem;
+      border-radius: 4px;
+    }
+  }
+}
+
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.451);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // pointer-events: all;
+}

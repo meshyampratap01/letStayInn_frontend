@@ -1,0 +1,34 @@
+<div class="dialog-backdrop" (click)="closeDialog()"></div>
+
+<dialog class="add-room-dialog" open>
+  <div class="dialog-header">
+    <h3>Add Room</h3>
+  </div>
+
+  <form class="dialog-form" #roomForm="ngForm">
+    <div class="form-field">
+      <label for="roomNumber">Room Number</label>
+      <input id="roomNumber" name="roomNumber" [(ngModel)]="room.number" required />
+    </div>
+
+    <div class="form-field">
+      <label for="roomType">Type</label>
+      <input id="roomType" name="roomType" [(ngModel)]="room.type" required />
+    </div>
+
+    <div class="form-field">
+      <label for="price">Price</label>
+      <input id="price" name="price" type="number" [(ngModel)]="room.price" required />
+    </div>
+
+    <div class="form-field">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="3" [(ngModel)]="room.description" required></textarea>
+    </div>
+
+    <div class="dialog-footer">
+      <button type="button" class="cancel-btn" (click)="closeDialog()">Cancel</button>
+      <button type="submit" class="submit-btn" [disabled]="!roomForm.valid" (click)="addRoom()">Add Room</button>
+    </div>
+  </form>
+</dialog>

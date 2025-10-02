@@ -1,0 +1,114 @@
+.employee-management {
+  padding: 2rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin: 0.2rem 0 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .add-employee-btn {
+      background-color: #28a745;
+      color: white;
+      font-weight: 500;
+    }
+  }
+
+  .employee-table {
+    width: 100%;
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: 600;
+      padding: 0.75rem;
+    }
+
+    td {
+      padding: 0.75rem;
+      vertical-align: middle;
+    }
+
+    .employee-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .avatar-icon {
+        font-size: 20px;
+        color: #007ad9;
+      }
+    }
+
+    .role-label {
+      background-color: #e0f7fa;
+      color: #00796b;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .status-active {
+      background-color: #dff0d8;
+      color: #3c763d;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .status-inactive {
+      background-color: #eeeeee;
+      color: #777;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .icon-btn {
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 8px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        i.material-icons {
+          font-size: 20px;
+          color: #333;
+        }
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+
+      .edit-btn {
+        color: #007ad9;
+      }
+
+      .delete-btn {
+        color: #d9534f;
+      }
+    }
+  }
+}

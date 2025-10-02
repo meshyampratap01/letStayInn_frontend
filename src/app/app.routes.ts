@@ -8,6 +8,8 @@ import { GuestComponent } from './dashboard/guest/guest.component';
 import { authGuard } from './guard/auth.guard';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { adminGuard } from './guard/admin.guard';
+// import { RoomsComponent } from './dashboard/admin/rooms/rooms.component';
+// import { EmployeeComponent } from './dashboard/admin/employee/employee.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +28,29 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [authGuard, adminGuard]
+    canActivate: [authGuard, adminGuard],
+    children: [
+      {
+        path: 'rooms',
+        loadComponent: () =>
+          import('./dashboard/admin/rooms/rooms.component').then(m => m.RoomsComponent),
+      },
+      {
+        path: 'employee',
+        loadComponent: () =>
+          import('./dashboard/admin/employee/employee.component').then(m => m.EmployeeComponent),
+      },
+      {
+        path: 'service-requests',
+        loadComponent: () =>
+          import('./dashboard/admin/service-request/service-request.component').then(m=>m.ServiceRequestComponent),
+      },
+      {
+        path: 'feedbacks',
+        loadComponent: () =>
+          import('./dashboard/admin/feedback/feedback.component').then(m=>m.FeedbackComponent),
+      }
+    ]
   },
   {
     path: 'guest',

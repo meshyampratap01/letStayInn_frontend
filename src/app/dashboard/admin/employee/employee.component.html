@@ -1,0 +1,48 @@
+<div class="employee-management">
+  <div class="header">
+    <div>
+      <h2>Employee Management</h2>
+      <p class="subtitle">Manage your hotel staff and their assignments</p>
+    </div>
+    <button pButton type="button" label="+ Add Employee" icon="pi pi-user-plus" class="add-employee-btn"></button>
+  </div>
+
+  <p-table [value]="employees()" class="employee-table" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Employee</th>
+        <th>Contact</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-employee>
+      <tr>
+        <td class="employee-info">
+          <i class="pi pi-user avatar-icon"></i>
+          <span>{{ employee.name }}</span>
+        </td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <span class="role-label">{{ employee.role }}</span>
+        </td>
+        <td>
+          <span [ngClass]="{
+            'status-active': employee.available === true,
+            'status-inactive': employee.available === false,
+          }">{{ employee.available ? 'Active' : 'Inactive' }}</span>
+        </td>
+        <td class="actions">
+          <button class="icon-btn edit-btn" type="button">
+            <i class="material-icons">edit</i>
+          </button>
+          <button class="icon-btn delete-btn" type="button">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

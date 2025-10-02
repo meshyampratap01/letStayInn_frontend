@@ -6,66 +6,55 @@
     <p class="subtitle">Welcome back! Here's what's happening at LetStayInn today.</p>
 
     <div class="card-grid">
-      <p-card class="dashboard-card available">
-        <div class="card-content">
-          <!-- <p-avatar icon="pi pi-bed" shape="circle" styleClass="icon green"></p-avatar> -->
-          <i class="material-icons">bed</i>
+      <p-card class="dashboard-card">
+        <div class="card-content" (click)="navigateAndScroll('rooms')">
           <div class="details">
-            @if (isRoomLoading()) {
-                <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '20px', height: '20px' }" />
-            } @else {
-                <h3>{{ availableRooms() }}</h3>
-            }
-            <p>Available Rooms</p>
-            <span>Ready for guests</span>
+            <h3>Room Status</h3>
+              <p-chart type="doughnut" [data]="roomChartData"
+                [options]="chartOptions" >
+              </p-chart>
+            <span>{{ availableRooms }} Available / {{ occupiedRooms }} Occupied</span>
           </div>
         </div>
       </p-card>
 
-      <p-card class="dashboard-card occupied">
-        <div class="card-content">
-          <!-- <p-avatar icon="pi pi-user" shape="square" ></p-avatar> -->
-          <i class="material-icons">hotel</i>
+      <p-card class="dashboard-card">
+        <div class="card-content" (click)="navigateAndScroll('employee')">
           <div class="details">
-            @if (isRoomLoading()) {
-                <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '1.5rem', height: '1.5rem', margin:'0'}" />
-            } @else {
-                <h3>{{ occupiedRooms() }}</h3>
-            }
-            <p>Occupied Rooms</p>
-            <span>Currently hosting</span>
+            <h3>Employee Status</h3>
+            <p-chart type="doughnut" [data]="employeeChartData" [options]="chartOptions"></p-chart>
+            <span>{{ availableEmployees }} Available / {{ unavailableEmployees }} Unavailable</span>
           </div>
         </div>
       </p-card>
 
-      <p-card class="dashboard-card pending">
-        <div class="card-content">
-          <!-- <p-avatar icon="pi pi-calendar" shape="circle" styleClass="icon orange"></p-avatar> -->
-          <i class="material-icons">edit_calendar</i>
+      <p-card class="dashboard-card">
+        <div class="card-content" (click)="navigateAndScroll('service-requests')">
           <div class="details">
-            @if (isRoomLoading()) {
-                <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '1.5rem', height: '1.5rem', margin:'0'}" />
-            } @else {
-                <h3>{{ pendingSvcRqst() }}</h3>
-            }
-            <p>Pending Requests</p>
-            <span>Needs attention</span>
+            <h3>Pending Requests</h3>
+            <h1>{{ pendingRequests }}</h1>
+            <span>Service requests needing attention</span>
           </div>
         </div>
       </p-card>
 
-      <p-card class="dashboard-card rating">
-        <div class="card-content">
-          <!-- <p-avatar icon="pi pi-star" shape="circle" styleClass="icon yellow"></p-avatar> -->
-          <!-- <i class="material-icons" >kid_star</i> -->
-          <i class="material-icons">stars</i>
+      <p-card class="dashboard-card">
+        <div class="card-content" (click)="navigateAndScroll('feedbacks')">
           <div class="details">
-            <h3>4.7</h3>
-            <p>Average Rating</p>
+            <h3>Average Rating</h3>
+            <h1>{{ averageRating().toFixed(1) }}</h1>
             <span>Guest satisfaction</span>
           </div>
         </div>
       </p-card>
+    </div>
+
+    <div class="menu-bar">
+      <p-menubar [model]="items"></p-menubar>
+    </div>
+
+    <div class="child-container" id="child-container">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

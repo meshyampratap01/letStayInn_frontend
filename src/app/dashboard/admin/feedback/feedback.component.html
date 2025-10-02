@@ -1,0 +1,36 @@
+<div class="feedback-container">
+  <div class="header">
+    <h2>Customer Feedback</h2>
+    <p class="subtitle">Review guest feedback and ratings to improve service quality</p>
+    <!-- <button pButton type="button" label="Add Review" icon="pi pi-plus" class="add-review-btn"></button> -->
+  </div>
+  <div class="rating-summary">
+    <p-rating [disabled]="true" [(ngModel)]="averageRating" [stars]="5" cancel="false"></p-rating>
+    <span class="rating-text">{{ averageRating().toFixed(1) }} Average ({{ totalFeedback() }} Reviews)</span>
+  </div>
+
+  <div class="feedback-list">
+    @for (feedback of feedbacks(); track feedback.id) {
+    <p-card class="feedback-card">
+      <ng-template pTemplate="header">
+        <div class="customer-info">
+          <i class="pi pi-user"></i>
+          <span>{{ feedback.user_name }}</span>
+        </div>
+      </ng-template>
+
+      <div class="rating-section">
+        <p-rating [disabled]="true" [(ngModel)]="feedback.rating" [stars]="5" cancel="false"></p-rating>
+        <span class="individual-rating">{{ feedback.rating }}/5</span>
+      </div>
+
+      <p class="comment">{{ feedback.message }}</p>
+
+      <div class="meta">
+        <small>{{ feedback.created_at| date: 'mediumDate' }}</small>
+        <span class="booking-id">Booking: {{ feedback.booking_id }}</span>
+      </div>
+    </p-card>
+    }
+  </div>
+</div>
