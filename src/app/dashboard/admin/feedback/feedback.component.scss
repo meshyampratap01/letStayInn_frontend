@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 .feedback-container {
   padding: 2rem;
 
@@ -21,6 +23,16 @@
       background-color: #007ad9;
       color: #fff;
       font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10%;
+      width: auto;
+      height: auto;
+
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
 
@@ -52,6 +64,7 @@
         font-weight: 600;
         font-size: 1.1rem;
         color: #333;
+        margin-top: 10px;
       }
 
       .rating-section {

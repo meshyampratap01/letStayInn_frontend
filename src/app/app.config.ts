@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 // import { providePrimeNG } from 'primeng/config';
-import  Aura  from '@primeng/themes/aura'
+import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -17,16 +17,22 @@ import { AddJwtInterceptor } from './interceptors/jwt.add';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([BaseUrlInterceptor,AddJwtInterceptor,loggingInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        BaseUrlInterceptor,
+        AddJwtInterceptor,
+        loggingInterceptor,
+      ])
+    ),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     providePrimeNG({
-      theme:{
+      theme: {
         preset: customPreset,
-        options:{
-          darkModeSelector: false || 'none'
-        }
-      }
-    })
+        options: {
+          darkModeSelector: false || 'none',
+        },
+      },
+    }),
   ],
 };

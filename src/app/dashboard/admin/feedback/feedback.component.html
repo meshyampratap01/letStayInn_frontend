@@ -2,7 +2,6 @@
   <div class="header">
     <h2>Customer Feedback</h2>
     <p class="subtitle">Review guest feedback and ratings to improve service quality</p>
-    <!-- <button pButton type="button" label="Add Review" icon="pi pi-plus" class="add-review-btn"></button> -->
   </div>
   <div class="rating-summary">
     <p-rating [disabled]="true" [(ngModel)]="averageRating" [stars]="5" cancel="false"></p-rating>
@@ -14,7 +13,7 @@
     <p-card class="feedback-card">
       <ng-template pTemplate="header">
         <div class="customer-info">
-          <i class="pi pi-user"></i>
+          <i class="pi pi-user" style="margin-left: 10px;"></i>
           <span>{{ feedback.user_name }}</span>
         </div>
       </ng-template>
@@ -28,7 +27,7 @@
 
       <div class="meta">
         <small>{{ feedback.created_at| date: 'mediumDate' }}</small>
-        <span class="booking-id">Booking: {{ feedback.booking_id }}</span>
+        <span class="booking-id">Room Number: {{ feedback.room_num }}</span>
       </div>
     </p-card>
     }

@@ -1,13 +1,59 @@
+@if(viewAddEmployeeDialog){
+<app-add-employee (closeAddEmployee)="onCloseAddEmployee($event)"/>
+}
+
+@if(isLoading){
+    <div class="loading-overlay">
+        <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+    </div>
+}
+
+<p-toast/>
+<p-confirmdialog></p-confirmdialog>
+
+<p-dialog
+  header="Update Employee"
+  [(visible)]="visible"
+  [style]="{ width: '30rem' }"
+  [modal]="true"
+  [closable]="false"
+  class="custom-dialog-content"
+>
+  <span class="dialog-subtitle">
+    Change availability for {{ employeeToEdit.name }}.
+  </span>
+
+  <div class="dialog-form">
+    <div class="form-group">
+      <label for="availability">Availability</label>
+      <p-dropdown
+        id="availability"
+        [options]="availabilityOptions"
+        [(ngModel)]="employeeToEdit.available"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select Availability"
+        class="custom-input"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="dialog-actions">
+    <button pButton type="button" label="Cancel" class="btn-secondary" (click)="onCancelUpdateEmployee()"></button>
+    <button pButton type="button" label="Update" class="btn-primary" (click)="updateEmployee()"></button>
+  </div>
+</p-dialog>
+
 <div class="employee-management">
   <div class="header">
     <div>
       <h2>Employee Management</h2>
       <p class="subtitle">Manage your hotel staff and their assignments</p>
     </div>
-    <button pButton type="button" label="+ Add Employee" icon="pi pi-user-plus" class="add-employee-btn"></button>
+    <button pButton type="button" label="+ Add Employee" icon="pi pi-user-plus" class="add-employee-btn" (click)="onClickAddEmployee()"></button>
   </div>
 
-  <p-table [value]="employees()" class="employee-table" responsiveLayout="scroll">
+  <p-table [value]="employees" class="employee-table" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
         <th>Employee</th>
@@ -35,11 +81,11 @@
           }">{{ employee.available ? 'Active' : 'Inactive' }}</span>
         </td>
         <td class="actions">
-          <button class="icon-btn edit-btn" type="button">
-            <i class="material-icons">edit</i>
+          <button class="icon-btn edit-btn" type="button" (click)="onSelectEditEmployee(employee)">
+            <i class="material-icons" style="color: #28a745;">edit</i>
           </button>
-          <button class="icon-btn delete-btn" type="button">
-            <i class="material-icons">delete</i>
+          <button class="icon-btn delete-btn" type="button" (click)="onSelectDeleteEmployee($event,employee)">
+            <i class="material-icons" style="color: #ef4444;">delete</i>
           </button>
         </td>
       </tr>

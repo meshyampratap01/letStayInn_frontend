@@ -8,17 +8,33 @@
   <form class="dialog-form" #roomForm="ngForm">
     <div class="form-field">
       <label for="roomNumber">Room Number</label>
-      <input id="roomNumber" name="roomNumber" [(ngModel)]="room.number" required />
+      <input id="roomNumber" name="roomNumber" type="number" [(ngModel)]="room.number" required min="1"
+        #roomNumber="ngModel" />
+      <small *ngIf="roomNumber.invalid && roomNumber.touched" class="error">
+        Room number must be greater than zero.
+      </small>
     </div>
+
 
     <div class="form-field">
       <label for="roomType">Type</label>
-      <input id="roomType" name="roomType" [(ngModel)]="room.type" required />
+
+      <p-dropdown id="roomType" name="roomType" [options]="roomTypeOptions" [(ngModel)]="room.type" optionLabel="label"
+        optionValue="value"
+        placeholder="Select room type"
+        required
+        #roomType="ngModel"
+        ></p-dropdown>
+
+      <small *ngIf="roomType.invalid && roomType.touched" class="error">
+        Room type is required.
+      </small>
     </div>
+
 
     <div class="form-field">
       <label for="price">Price</label>
-      <input id="price" name="price" type="number" [(ngModel)]="room.price" required />
+      <input id="price" name="price" type="number" [(ngModel)]="room.price" required min="1" />
     </div>
 
     <div class="form-field">
@@ -28,7 +44,9 @@
 
     <div class="dialog-footer">
       <button type="button" class="cancel-btn" (click)="closeDialog()">Cancel</button>
-      <button type="submit" class="submit-btn" [disabled]="!roomForm.valid" (click)="addRoom()">Add Room</button>
+      <button type="submit" class="submit-btn" [disabled]="!roomForm.valid" (click)="addRoom()">
+        Add Room
+      </button>
     </div>
   </form>
 </dialog>

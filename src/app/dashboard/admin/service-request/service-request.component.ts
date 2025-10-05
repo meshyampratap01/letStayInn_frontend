@@ -1,28 +1,44 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { DropdownItem, DropdownModule } from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../../service/admin.service';
 import { svcRequest } from '../../../models/service_request';
-import { FormsModule } from '@angular/forms';
+import { EmployeeService } from '../../../service/employee.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-service-request',
-  imports: [CommonModule, TableModule, DropdownModule, FormsModule, DatePipe],
+  standalone: true,
+  imports: [
+    CommonModule,
+    TableModule,
+    DropdownModule,
+    FormsModule,
+    DatePipe,
+    ConfirmDialogModule,
+    ToastModule,
+    ProgressSpinnerModule,
+  ],
+  providers: [ConfirmationService, MessageService],
   templateUrl: './service-request.component.html',
   styleUrl: './service-request.component.scss',
 })
 export class ServiceRequestComponent {
   adminService = inject(AdminService);
+  employeeService = inject(EmployeeService);
+  confirmationService = inject(ConfirmationService);
+  messageService = inject(MessageService);
+
+  isLoading= false;
+
   requests = signal<svcRequest[]>([]);
-  staffOptions = [
-      { label: 'John Smith - Housekeeper', value: 'John Smith' },
-      { label: 'Sarah Johnson - Chef', value: 'Sarah Johnson' },
-      { label: 'Mike Wilson - Room Service', value: 'Mike Wilson' },
-      { label: 'Emma Davis - Housekeeper', value: 'Emma Davis' },
-      { label: 'David Brown - Waiter', value: 'David Brown' },
-      { label: 'Lisa Garcia - Receptionist', value: 'Lisa Garcia' },
-    ];
+  staffOptions: { label: string; value: string }[] = [];
 
   constructor() {
     this.adminService.loadServiceRequest().subscribe({
@@ -30,7 +46,56 @@ export class ServiceRequestComponent {
         this.requests.set(res.data);
       },
     });
+
+    this.employeeService.employees.subscribe({
+      next: (employeeList) => {
+        const availableStaff = employeeList.filter(emp => emp.available);
+        this.staffOptions = availableStaff.map(emp => ({
+          label: `${emp.name} - ${emp.role}`,
+          value: emp.id
+        }));
+      }
+    });
   }
 
-  assignRequest(req: svcRequest) {}
+  assignRequest(req: svcRequest) {
+    this.confirmationService.confirm({
+      message: `Are you sure you want to assign this request to employee ID ${req.EmployeeID}?`,
+      header: 'Confirm Assignment',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.isLoading=true;
+        const payload = {
+          requestId: req.id,
+          employeeId: req.EmployeeID
+        };
+
+        this.employeeService.assignServiceRequest(payload).subscribe({
+          next: () => {
+            this.employeeService.loadEmployee().subscribe();
+            this.isLoading = false;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Assigned',
+              detail: 'Request successfully assigned.'
+            });
+
+            this.adminService.loadServiceRequest().subscribe({
+              next: (res) => {
+                this.requests.set(res.data);
+              }
+            });
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Assignment failed.'
+            });
+            console.error('Assignment failed:', err);
+          }
+        });
+      }
+    });
+  }
 }

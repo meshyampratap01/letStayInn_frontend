@@ -18,13 +18,13 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FeedbackService } from '../../service/feedback.service';
 import { RoomService } from '../../service/room.service';
 import { ChartModule } from 'primeng/chart';
+import { EmployeeService } from '../../service/employee.service';
 
 @Component({
   selector: 'app-admin',
   imports: [
     HeaderComponent,
     CardModule,
-    Card,
     AvatarModule,
     ProgressSpinnerModule,
     MenubarModule,
@@ -41,6 +41,7 @@ export class AdminComponent {
   authService = inject(AuthService);
   feedbackSvc = inject(FeedbackService);
   roomService = inject(RoomService);
+  employeeService = inject(EmployeeService);
 
   isRoomLoading = signal(true);
   isServiceLoading = signal(true);
@@ -124,16 +125,16 @@ export class AdminComponent {
       },
     });
 
-    this.adminService.loadEmployee().subscribe();
+    this.employeeService.loadEmployee().subscribe();
 
-    this.adminService._availableEmployee.subscribe({
+    this.employeeService._availableEmployee.subscribe({
       next: (res) => {
         this.availableEmployees = res;
         this.updateRoomChart();
       },
     });
 
-    this.adminService._unavailableEmployee.subscribe({
+    this.employeeService._unavailableEmployee.subscribe({
       next: (res) => {
         this.unavailableEmployees = res;
         this.updateEmployeeChart();

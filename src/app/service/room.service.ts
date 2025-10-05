@@ -66,4 +66,13 @@ export class RoomService {
       description: room.description,
     })
   }
+
+  submitRequest(roomNumber: number, type: string, details: string){
+    const url = `service-requests`
+    return this.httpClient.post<response>(url,{
+      room_num: roomNumber,
+      type: type,
+      details: details,
+    })
+  }
 }

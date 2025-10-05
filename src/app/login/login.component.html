@@ -10,15 +10,28 @@
 	<div [class]="'login-right'">
 		<h2 class="login-title">Login</h2>
 		<form (ngSubmit)="login(form)" #form>
-			<div class="login-field">
+			<div class="login-field" [ngClass]="{'invalid': emailRef.invalid && emailRef.touched}">
 				<span class="login-field-icon"><i class="material-icons">mail_outline</i></span>
-				<input type="email" class="login-input" id="login-input" required email placeholder="Email Address"
-					[(ngModel)]='email' name="email" (click)="inputClicked()" />
+				<input type="email" class="login-input" required email placeholder="Email Address" [(ngModel)]="email"
+					name="email" #emailRef="ngModel" (click)="inputClicked()" />
 			</div>
-			<div class="login-field">
+			<div>
+				<div class="error-message" *ngIf="emailRef.touched && emailRef.invalid">
+					<small *ngIf="emailRef.errors?.['required']">Email is required</small>
+					<small *ngIf="emailRef.errors?.['email']">Enter a valid email</small>
+				</div>
+			</div>
+
+			<div class="login-field" [ngClass]="{'invalid': passwordRef.invalid && passwordRef.touched}">
 				<span class="login-field-icon"><i class="material-icons">lock_outline</i></span>
-				<input type="password" placeholder="Password" class="login-input" required minlength="8"
-					[(ngModel)]='password' name="password" (click)="inputClicked()" />
+				<input type="password" class="login-input" required minlength="8" placeholder="Password"
+					[(ngModel)]="password" name="password" #passwordRef="ngModel" (click)="inputClicked()" />
+			</div>
+			<div>
+			<div class="error-message" *ngIf="passwordRef.touched && passwordRef.invalid">
+				<small *ngIf="passwordRef.errors?.['required']">Password is required</small>
+				<small *ngIf="passwordRef.errors?.['minlength']">Minimum 8 characters</small>
+			</div>
 			</div>
 			<button type="submit" [disabled]="loginClicked()" class="login-btn">
 				@if(loginClicked()){

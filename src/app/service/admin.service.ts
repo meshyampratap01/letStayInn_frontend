@@ -13,12 +13,9 @@ export class AdminService {
 
   rooms = signal<room[] | null>(null);
 
-  serviceRequests = signal<svcRequest[]>([])
+  serviceRequests = new BehaviorSubject<svcRequest[]>([])
 
   _pendingRequests = new BehaviorSubject<number>(0);
-
-  _availableEmployee = new BehaviorSubject<number>(0);
-  _unavailableEmployee = new BehaviorSubject<number>(0);
 
   employee = signal<employee[] | null>(null)
 
@@ -32,7 +29,7 @@ export class AdminService {
       tap((res) => {
         let pending_svcRequest:number = 0;
         const svcRequests = res.data;
-        this.serviceRequests.set(svcRequests)
+        this.serviceRequests.next(svcRequests)
         svcRequests.forEach((svcRequest) => {
           if (svcRequest.status === 'Pending') {
             pending_svcRequest = pending_svcRequest +1;
@@ -41,26 +38,5 @@ export class AdminService {
         this._pendingRequests.next(pending_svcRequest);
       })
     );
-  }
-
-  loadEmployee(){
-    const url='employees';
-    return this.httpClient.get<getEmployeeResponse>(url)
-    .pipe(
-      tap((res)=>{
-        let availableEmployee = 0;
-        let unavailableEmployee = 0;
-        res.data.forEach((emp)=>{
-          if(emp.available){
-            availableEmployee++;
-          }else{
-            unavailableEmployee++;
-          }
-        })
-        this._availableEmployee.next(availableEmployee);
-        this._unavailableEmployee.next(unavailableEmployee);
-        this.employee.set(res.data);
-      })
-    )
   }
 }

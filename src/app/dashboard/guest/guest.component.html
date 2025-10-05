@@ -1,1 +1,48 @@
-<app-header [userName]="userName" [userRole]="userRole"></app-header>
+<div class="guest-dashboard-container">
+  <app-header [userName]="userName" [userRole]="userRole"></app-header>
+
+  <div class="welcome-section">
+    <h2>Welcome back, {{ userName }}!</h2>
+    <p>Manage your bookings, request services, and share your experiences.</p>
+
+    <div class="status-cards">
+      <p-card class="status-card bookings hover-card" (click)="navigateAndScroll('my-bookings')">
+        <div class="icon-wrapper">
+          <i class="material-icons">check_circle</i>
+        </div>
+        <div class="card-content">
+          <h1>{{ totalActiveBookings }}</h1>
+          <span>Active Bookings</span>
+        </div>
+      </p-card>
+
+      <p-card class="status-card requests hover-card" (click)="navigateAndScroll('service-requests')">
+        <div class="icon-wrapper">
+          <i class="material-icons">schedule</i>
+        </div>
+        <div class="card-content">
+          <h1>{{ activeRequests.length }}</h1>
+          <span>Active Requests</span>
+        </div>
+      </p-card>
+
+      <p-card class="status-card reviews hover-card">
+        <div class="icon-wrapper">
+          <i class="material-icons">chat</i>
+        </div>
+        <div class="card-content">
+          <h1>{{ reviewsGiven }}</h1>
+          <span>Reviews Given</span>
+        </div>
+      </p-card>
+    </div>
+  </div>
+
+  <div class="menu-bar">
+    <p-menubar [model]="menuItems"></p-menubar>
+  </div>
+
+  <div class="child-container" id="child-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

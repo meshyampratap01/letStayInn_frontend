@@ -13,6 +13,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -26,13 +27,14 @@ import { PasswordModule } from 'primeng/password';
     ProgressBarModule,
     IconFieldModule,
     InputIconModule,
-    PasswordModule
+    PasswordModule,
+    CommonModule,
   ],
   providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
@@ -45,6 +47,14 @@ export class LoginComponent {
   private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
+
+  ngOnInit(): void {
+    const tokenStr = JSON.parse(localStorage.getItem('token') as string);
+
+    if (tokenStr) {
+      this.router.navigate(['admin']);
+    }
+  }
 
   login(form: HTMLFormElement) {
     this.loginClicked.set(true);
@@ -73,8 +83,9 @@ export class LoginComponent {
             severity: 'error',
             closable: true,
             summary: 'Login Failed',
-            detail: err?.error?.message || 'Invalid credentials or server error',
-            life: 4000
+            detail:
+              err?.error?.message || 'Invalid credentials or server error',
+            life: 4000,
           });
         },
         complete: () => {
@@ -83,7 +94,10 @@ export class LoginComponent {
         },
       });
     this.destroyRef.onDestroy(() => {
-      if (loginSubscription && typeof loginSubscription.unsubscribe === 'function') {
+      if (
+        loginSubscription &&
+        typeof loginSubscription.unsubscribe === 'function'
+      ) {
         loginSubscription.unsubscribe();
       }
     });

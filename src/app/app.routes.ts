@@ -55,7 +55,24 @@ export const routes: Routes = [
   {
     path: 'guest',
     component: GuestComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'my-bookings',
+        loadComponent: () =>
+          import('./dashboard/guest/my-bookings/my-bookings.component').then(m=>m.MyBookingsComponent),
+      },
+      {
+        path: 'book-room',
+        loadComponent: () =>
+          import('./dashboard/guest/room/room.component').then(m=>m.RoomComponent)
+      },
+      {
+        path: 'service-requests',
+        loadComponent: () =>
+          import('./dashboard/guest/service-request/service-request.component').then(m=>m.ServiceRequestComponent)
+      }
+    ]
   },
   {
     path: 'logout',
