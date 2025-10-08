@@ -1,6 +1,5 @@
-body{
+body {
   background-color: rgba(124, 205, 238, 0.859);
-
 }
 
 .guest-dashboard-container {
@@ -28,6 +27,15 @@ body{
       justify-content: center;
       gap: 1.5rem;
       flex-wrap: wrap;
+
+      &.book-room .icon-wrapper {
+        color: #f06292; // Soft pink for a welcoming feel
+      }
+
+      &.book-room {
+        background: linear-gradient(135deg, #f48fb1, #ce93d8);
+        color: white;
+      }
 
       .status-card {
         width: 320px;
@@ -99,4 +107,3 @@ body{
     }
   }
 }
-

@@ -1,0 +1,73 @@
+<p-toast/>
+
+@if(isLoading){
+    <div class="loading-overlay">
+        <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+    </div>
+}
+
+<p-dialog header="Submit Feedback" [(visible)]="showDialog" [modal]="true" [closable]="true" [style]="{ width: '30vw' }" class="feedback-dialog">
+  <div class="dialog-content">
+    <label for="rating">Your Rating:</label>
+    <p-rating [(ngModel)]="newFeedback.rating" [stars]="5"></p-rating>
+
+    <label for="message">Your Review:</label>
+    <textarea
+      id="message"
+      [(ngModel)]="newFeedback.message"
+      rows="5"
+      maxlength="175"
+      class="review-textarea"
+      (ngModelChange)="validateReview()"
+      [ngClass]="{ 'invalid': reviewInvalid }"
+      placeholder="Write your experience here (max 175 characters)"
+    ></textarea>
+    <small *ngIf="reviewInvalid" class="error-text">Review is required and must be under 175 characters.</small>
+
+    <div class="dialog-actions">
+      <button pButton label="Cancel" icon="pi pi-times" (click)="showDialog = false" class="p-button-text"></button>
+      <button
+        pButton
+        label="Submit"
+        icon="pi pi-check"
+        [disabled]="reviewInvalid || !newFeedback.message.trim()"
+        (click)="submitFeedback()"
+      ></button>
+    </div>
+  </div>
+</p-dialog>
+
+<div class="feedback-container">
+  <div class="header">
+    <h2>My Feedback</h2>
+    <p>Share your experience and help us improve.</p>
+    <button pButton type="button" label="+ Submit New Feedback" icon="pi pi-comment" class="submit-btn" (click)="showDialog=true"></button>
+  </div>
+
+  <div class="feedback-list">
+    <p-card *ngFor="let fb of feedbackList" class="feedback-card">
+      <div class="card-header">
+        <div class="room-info">
+          <h3>Room {{ fb.room_num }}</h3>
+        </div>
+        <div class="rating">
+          <p-rating [readonly]="true" [stars]="5" [(ngModel)]="fb.rating"></p-rating>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="message">"{{ fb.message }}"</p>
+      </div>
+
+      <div class="card-footer">
+        <span class="date-time">
+          <i class="material-icons">calendar_today</i> {{ fb.created_at | date: 'MMM d, y' }}
+          <i class="material-icons">access_time</i> {{ fb.created_at | date: 'shortTime' }}
+        </span>
+        <span class="status">
+          <i class="material-icons status-icon">check_circle</i> Submitted
+        </span>
+      </div>
+    </p-card>
+  </div>
+</div>

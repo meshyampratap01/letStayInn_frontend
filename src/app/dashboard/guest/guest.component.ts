@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Roles } from '../../models/user';
 import { HeaderComponent } from '../../shared/header/header.component';
@@ -9,6 +9,7 @@ import { CardModule } from 'primeng/card';
 import { BookingService } from '../../service/booking.service';
 import { AdminService } from '../../service/admin.service';
 import { svcRequest } from '../../models/service_request';
+import { FeedbackService } from '../../service/feedback.service';
 
 @Component({
   selector: 'app-guest',
@@ -17,9 +18,10 @@ import { svcRequest } from '../../models/service_request';
   styleUrl: './guest.component.scss',
 })
 export class GuestComponent {
-  authService = inject(AuthService);
-  bookingService = inject(BookingService);
-  adminService = inject(AdminService);
+  private authService = inject(AuthService);
+  private bookingService = inject(BookingService);
+  private adminService = inject(AdminService);
+  private feedbackService = inject(FeedbackService);
   router = inject(Router);
 
   userName = this.authService.user()?.UserName as string;
@@ -27,9 +29,9 @@ export class GuestComponent {
   id = this.authService.user()?.ID;
   userRole = Roles[this.role];
 
-  totalActiveBookings = 0;
+  totalActiveBookings: number|null= null;
   activeRequests: svcRequest[] = [];
-  reviewsGiven = 3;
+  reviewsGiven: number|null = null;
 
   constructor(){
 
@@ -40,6 +42,17 @@ export class GuestComponent {
         this.totalActiveBookings = res;
       }
     })
+
+        this.feedbackService.getAverageRating().subscribe();
+    effect(() => {
+      let count = 0;
+      this.feedbackService.feedbacks().forEach((fb)=>{
+        if(fb.user_id===this.id){
+          count++;
+        }
+      })
+      this.reviewsGiven=count;
+    });
 
     this.adminService.loadServiceRequest().subscribe();
     this.adminService.serviceRequests.subscribe({
@@ -55,7 +68,7 @@ export class GuestComponent {
     { label: 'My Bookings', routerLink: ['my-bookings'] },
     { label: 'Book Room', routerLink: ['book-room'] },
     { label: 'Services', routerLink: ['service-requests'] },
-    { label: 'Feedback', routerLink: ['feedback'] },
+    { label: 'Feedback', routerLink: ['feedbacks'] },
   ];
 
     navigateAndScroll(route: string) {

@@ -9,7 +9,7 @@
   </div>
 
   <div class="feedback-list">
-    @for (feedback of feedbacks(); track feedback.id) {
+    @for (feedback of paginatedFeedbacks(); track feedback.id) {
     <p-card class="feedback-card">
       <ng-template pTemplate="header">
         <div class="customer-info">
@@ -32,4 +32,10 @@
     </p-card>
     }
   </div>
+  <p-paginator
+    [rows]="rowsPerPage"
+    [totalRecords]="feedbacks().length"
+    (onPageChange)="onPageChange($event)"
+    styleClass="custom-paginator"
+    ></p-paginator>
 </div>

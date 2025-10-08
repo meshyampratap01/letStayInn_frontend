@@ -31,6 +31,11 @@ export const routes: Routes = [
     canActivate: [authGuard, adminGuard],
     children: [
       {
+        path:'',
+        redirectTo: 'rooms',
+        pathMatch: "prefix",
+      },
+      {
         path: 'rooms',
         loadComponent: () =>
           import('./dashboard/admin/rooms/rooms.component').then(m => m.RoomsComponent),
@@ -58,6 +63,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       {
+        path:'',
+        redirectTo: 'my-bookings',
+        pathMatch: "prefix",
+      },
+      {
         path: 'my-bookings',
         loadComponent: () =>
           import('./dashboard/guest/my-bookings/my-bookings.component').then(m=>m.MyBookingsComponent),
@@ -71,7 +81,12 @@ export const routes: Routes = [
         path: 'service-requests',
         loadComponent: () =>
           import('./dashboard/guest/service-request/service-request.component').then(m=>m.ServiceRequestComponent)
-      }
+      },
+      {
+        path: 'feedbacks',
+        loadComponent: ()=>
+          import('./dashboard/guest/feedback/feedback.component').then(m=>m.FeedbackComponent)
+      },
     ]
   },
   {

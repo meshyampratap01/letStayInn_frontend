@@ -1,0 +1,162 @@
+.feedback-container {
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    display: flex;
+    justify-content: space-around;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .submit-btn {
+      background-color: #5063cc;
+      color: white;
+      border-radius: 6px;
+    }
+  }
+
+  .feedback-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+
+    .feedback-card {
+      width: 360px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .room-info {
+          h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #5063cc;
+          }
+
+          span {
+            font-size: 0.9rem;
+            color: #777;
+          }
+        }
+
+        .rating {
+          ::ng-deep .p-rating .p-icon {
+            color: #fbc02d;
+          }
+        }
+      }
+
+      .card-body {
+        .message {
+          font-size: 1rem;
+          color: #444;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #666;
+
+        .material-icons {
+          font-size: 1rem;
+          vertical-align: middle;
+          margin-right: 4px;
+          margin-bottom: 3.5px;
+        }
+
+        .status {
+          display: flex;
+          align-items: center;
+
+          .status-icon {
+            color: #4cc450;
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .feedback-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+.feedback-dialog {
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .review-textarea {
+      resize: none;
+      padding: 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-family: "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.4;
+      max-height: 8rem;
+
+      &.invalid {
+        border-color: #e74c3c;
+      }
+    }
+
+    .error-text {
+      color: #e74c3c;
+      font-size: 0.8rem;
+      margin-top: -0.5rem;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.451);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // pointer-events: all;
+}

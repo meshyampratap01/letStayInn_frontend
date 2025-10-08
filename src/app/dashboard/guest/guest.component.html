@@ -5,7 +5,19 @@
     <h2>Welcome back, {{ userName }}!</h2>
     <p>Manage your bookings, request services, and share your experiences.</p>
 
+    
     <div class="status-cards">
+      
+      <p-card class="status-card book-room hover-card" (click)="navigateAndScroll('book-room')">
+        <div class="icon-wrapper">
+          <i class="material-icons" style="color:#3d86c2;">meeting_room</i>
+        </div>
+        <div class="card-content">
+          <h1>Book Now</h1>
+          <span>Click to Book Room</span>
+        </div>
+      </p-card>
+
       <p-card class="status-card bookings hover-card" (click)="navigateAndScroll('my-bookings')">
         <div class="icon-wrapper">
           <i class="material-icons">check_circle</i>
@@ -26,7 +38,7 @@
         </div>
       </p-card>
 
-      <p-card class="status-card reviews hover-card">
+      <p-card class="status-card reviews hover-card" (click)="navigateAndScroll('feedbacks')">
         <div class="icon-wrapper">
           <i class="material-icons">chat</i>
         </div>

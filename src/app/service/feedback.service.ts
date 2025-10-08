@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, input, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { feedback, getFeedbackResponse } from '../models/feedback';
+import { response } from '../models/response';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +44,13 @@ export class FeedbackService {
         return totalRating / response.data.length;
       })
     )
+  }
+
+  submitFeedback(newFeedback:feedback){
+    const url = 'feedbacks';
+    return this.httpClient.post<response>(url,{
+      message: newFeedback.message,
+      rating: newFeedback.rating,
+    })
   }
 }
