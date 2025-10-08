@@ -1,11 +1,21 @@
 @if(isLoading){
-    <div class="loading-overlay">
-        <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
-    </div>
+<div class="loading-overlay">
+    <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s"
+        [style]="{ width: '50px', height: '50px' }" />
+</div>
 }
 
 <p-toast></p-toast>
 <p-confirmDialog></p-confirmDialog>
+
+<div class="service-request">
+<div class="title-header">
+        <h2>Service Requests</h2>
+        <p class="subtitle">
+            <span>Manage Service Requests and Assign to employee in one click</span>
+        </p>
+</div>
+
 
 <p-table [value]="requests()" class="request-table" responsiveLayout="scroll">
     <ng-template pTemplate="header">
@@ -48,3 +58,5 @@
         </tr>
     </ng-template>
 </p-table>
+
+</div>

@@ -66,9 +66,8 @@
 
     <ng-template pTemplate="body" let-employee>
       <tr>
-        <td class="employee-info">
-          <i class="pi pi-user avatar-icon"></i>
-          <span>{{ employee.name }}</span>
+        <td>
+          {{ employee.name }}
         </td>
         <td>{{ employee.email }}</td>
         <td>
@@ -78,7 +77,7 @@
           <span [ngClass]="{
             'status-active': employee.available === true,
             'status-inactive': employee.available === false,
-          }">{{ employee.available ? 'Active' : 'Inactive' }}</span>
+          }">{{ employee.available ? 'Available' : 'Unavailable' }}</span>
         </td>
         <td class="actions">
           <button class="icon-btn edit-btn" type="button" (click)="onSelectEditEmployee(employee)">

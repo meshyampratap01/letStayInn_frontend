@@ -53,4 +53,13 @@ export class FeedbackService {
       rating: newFeedback.rating,
     })
   }
+
+  deleteFeedback(feedbackID: string){
+    const url = 'feedbacks';
+    return this.httpClient.delete<response>(url,{
+      body:{
+        feedback_id: feedbackID,
+      }
+    })
+  }
 }

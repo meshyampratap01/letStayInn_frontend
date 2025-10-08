@@ -71,7 +71,7 @@
             (click)="onClickAddRoom()"></button>
     </div>
 
-    <p-table [value]="rooms" class="room-table" responsiveLayout="scroll">
+    <p-table [value]="paginatedRooms()" class="room-table" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
                 <th>Room Number</th>
@@ -110,4 +110,10 @@
             </tr>
         </ng-template>
     </p-table>
+    <p-paginator
+        [rows]="rowsPerPage"
+        [totalRecords]="rooms.length"
+        (onPageChange)="onPageChange($event)"
+        styleClass="custom-paginator"
+    ></p-paginator>
 </div>

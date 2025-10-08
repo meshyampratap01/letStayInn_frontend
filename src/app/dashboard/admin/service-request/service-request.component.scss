@@ -1,7 +1,9 @@
+@import "primeicons/primeicons.css";
+
 .service-request {
   padding: 2rem;
 
-  .header {
+  .title-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,57 +13,134 @@
       margin: 0;
       font-size: 1.8rem;
       font-weight: 600;
+      color: #333;
     }
 
     .subtitle {
-      margin: 0.2rem 0 0;
-      color: #666;
+      margin-top: 0.5rem;
       font-size: 0.95rem;
+      color: #555;
+      font-weight: 400;
+
+      span {
+        margin-right: 1rem;
+        font-weight: 500;
+
+        &.pending {
+          color: #f0ad4e;
+        }
+
+        &.assigned {
+          color: #5cb85c;
+        }
+
+        &.inprogress {
+          color: #0275d8;
+        }
+
+        &.completed {
+          color: #6c757d;
+        }
+      }
     }
   }
 
   .request-table {
     width: 100%;
 
+    th {
+      background-color: #f4f4f4;
+      font-weight: 600;
+      padding: 0.75rem;
+    }
+
+    td {
+      padding: 0.75rem;
+      vertical-align: middle;
+    }
+
+    .status-assigned,
+    .status-pending,
+    .status-inprogress,
+    .status-completed {
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+
     .status-assigned {
-      color: #5cb85c;
-      font-weight: bold;
+      background-color: #dff0d8;
+      color: #3c763d;
     }
 
     .status-pending {
-      color: #f0ad4e;
-      font-weight: bold;
+      background-color: #fcf8e3;
+      color: #8a6d3b;
     }
 
     .status-inprogress {
-      color: #0275d8;
-      font-weight: bold;
+      background-color: #d9edf7;
+      color: #31708f;
     }
 
     .status-completed {
-      color: #6c757d;
-      font-weight: bold;
+      background-color: #eeeeee;
+      color: #777;
     }
 
     .actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
       .assign-dropdown {
         width: 14rem;
       }
+
+      .icon-btn {
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 8px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        i.pi {
+          font-size: 20px;
+          color: #333;
+        }
+
+        &:hover {
+          background-color: #e0e0e0;
+        }
+
+        &.edit-btn {
+          color: #007ad9;
+        }
+
+        &.delete-btn {
+          color: #d9534f;
+        }
+      }
     }
   }
-}
 
-
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.451);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // pointer-events: all;
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.451);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { room } from '../../../models/room';
 import { ButtonModule } from 'primeng/button';
@@ -15,6 +15,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TextareaModule } from 'primeng/textarea';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { Paginator, PaginatorModule } from "primeng/paginator";
 
 @Component({
   selector: 'app-rooms',
@@ -32,7 +33,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TextareaModule,
     ProgressBarModule,
     ProgressSpinnerModule,
-  ],
+    PaginatorModule
+],
   providers: [MessageService, ConfirmationService],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss',
@@ -56,13 +58,18 @@ export class RoomsComponent {
   };
 
   rooms: room[] = [];
+  paginatedRooms = signal<room[]>([]);
 
   viewAddRoomDialog = false;
+
+  currentPage = signal<number>(0);
+  rowsPerPage = 8;
 
   constructor() {
     this.roomService.rooms.subscribe({
       next: (val) => {
         this.rooms = val;
+        this.updatePaginatedRooms();
       },
     });
     this.roomType = ['Deluxe', 'Standard', 'Suite', 'Executive'];
@@ -175,5 +182,16 @@ export class RoomsComponent {
         this.visible = false;
       },
     });
+  }
+
+  updatePaginatedRooms(){
+    const start = this.currentPage()*this.rowsPerPage;
+    const end = start + this.rowsPerPage;
+    this.paginatedRooms.set(this.rooms.slice(start,end)); 
+  }
+
+  onPageChange(event: any){
+    this.currentPage.set(event.page);
+    this.updatePaginatedRooms();
   }
 }

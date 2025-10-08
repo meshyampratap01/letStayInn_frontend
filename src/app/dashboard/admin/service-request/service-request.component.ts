@@ -35,7 +35,7 @@ export class ServiceRequestComponent {
   confirmationService = inject(ConfirmationService);
   messageService = inject(MessageService);
 
-  isLoading= false;
+  isLoading = false;
 
   requests = signal<svcRequest[]>([]);
   staffOptions: { label: string; value: string }[] = [];
@@ -49,12 +49,12 @@ export class ServiceRequestComponent {
 
     this.employeeService.employees.subscribe({
       next: (employeeList) => {
-        const availableStaff = employeeList.filter(emp => emp.available);
-        this.staffOptions = availableStaff.map(emp => ({
+        const availableStaff = employeeList.filter((emp) => emp.available);
+        this.staffOptions = availableStaff.map((emp) => ({
           label: `${emp.name} - ${emp.role}`,
-          value: emp.id
+          value: emp.id,
         }));
-      }
+      },
     });
   }
 
@@ -64,10 +64,10 @@ export class ServiceRequestComponent {
       header: 'Confirm Assignment',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.isLoading=true;
+        this.isLoading = true;
         const payload = {
           requestId: req.id,
-          employeeId: req.EmployeeID
+          employeeId: req.EmployeeID,
         };
 
         this.employeeService.assignServiceRequest(payload).subscribe({
@@ -77,25 +77,29 @@ export class ServiceRequestComponent {
             this.messageService.add({
               severity: 'success',
               summary: 'Assigned',
-              detail: 'Request successfully assigned.'
+              detail: 'Request successfully assigned.',
             });
 
             this.adminService.loadServiceRequest().subscribe({
               next: (res) => {
                 this.requests.set(res.data);
-              }
+              },
             });
           },
           error: (err) => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: 'Assignment failed.'
+              detail: 'Assignment failed.',
             });
             console.error('Assignment failed:', err);
-          }
+          },
         });
-      }
+      },
     });
+  }
+
+  countByStatus(status: string): number {
+    return this.requests().filter((req) => req.status === status).length;
   }
 }
