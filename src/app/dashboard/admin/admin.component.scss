@@ -1,6 +1,6 @@
 .dashboard {
   padding: 2rem;
-  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  font-family: var(--font-family);
 
   .title {
     font-size: 2rem;
@@ -19,6 +19,7 @@
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
   }
+
 
   .dashboard-card {
     height: 400px;

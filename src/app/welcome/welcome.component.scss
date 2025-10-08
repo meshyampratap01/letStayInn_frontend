@@ -1,16 +1,8 @@
-$primary: #1769ff;
-$background: #c0c0c031;
-$card-bg: #ffffff25;
-$card-shadow: 0 2px 12px rgba(23, 104, 255, 0.211);
-$text: #222;
-$subtitle: #4a4a4ac6;
-$border-radius: 16px;
-
 .welcome-container {
-	background: $background;
-	color: $text;
+	background: var(--background);
+	color: var(--text);
 	min-height: 100vh;
-	font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+	font-family: var(--font-family);
 }
 
 .hero-section {

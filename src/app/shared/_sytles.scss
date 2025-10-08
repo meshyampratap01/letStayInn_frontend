@@ -1,12 +1,72 @@
 :root {
-  $primary-color: #007ad9;
-  $secondary-color: #e0e0e0;
-  $danger-color: #ef4444;
-  $text-color: #333;
-  $subtitle-color: #6c757d;
-  $background-color: #fdfdfd;
-  $border-radius: 8px;
-  $input-padding: 0.5rem;
-  $font-size: 0.95rem;
-  $table-header-bg: #f4f4f4;
+  // Theme Colors
+  --primary: #1769ff;
+  --background: #f8f9fa;
+  --text: #222;
+  --subtitle: #4a4a4ac6;
+  --card-bg: #fff;
+  --primary-color: #007ad9;
+  --secondary-color: #e0e0e0;
+  --danger-color: #ef4444;
+  --subtitle-color: #6c757d;
+  
+  // Status Colors
+  --success-bg: #dff0d8;
+  --success-text: #3c763d;
+  --warning-bg: #fcf8e3;
+  --warning-text: #8a6d3b;
+  --info-bg: #d9edf7;
+  --info-text: #31708f;
+  --error-bg: #f2dede;
+  --error-text: #a94442;
+  --neutral-bg: #eeeeee;
+  --neutral-text: #777;
+  
+  // Shadows
+  --card-shadow: 0 2px 12px rgba(23, 105, 255, 0.08);
+  --hover-shadow: 0 4px 24px rgba(23, 104, 255, 0.334);
+  --button-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --header-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  
+  // Layout
+  --border-radius: 16px;
+  --button-radius: 8px;
+  --input-padding: 0.5rem;
+  --section-padding: 2rem;
+  --card-padding: 1.5rem;
+  
+  // Typography
+  --font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  --font-size: 0.95rem;
+  --font-size-small: 0.85rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.2rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  // Spacing
+  --gap-small: 0.5rem;
+  --gap-medium: 1rem;
+  --gap-large: 1.5rem;
+  --gap-xl: 2rem;
+  --margin-small: 0.5rem;
+  --margin-medium: 1rem;
+  --margin-large: 1.5rem;
+  --margin-xl: 2rem;
+  
+  --primary-50: #e0e7ff;
+  --primary-100: #c0d4ff;
+  --primary-200: #a1bfff;
+  --primary-300: #82aaff;
+  --primary-400: #6395ff;
+  --primary-500: #4480ff;
+  --primary-600: #1769ff;
+  --primary-700: #145edc;
+  --primary-800: #104bb3;
+  --primary-900: #0d3d94;
+  --primary-950: #0a2f75;
 }
