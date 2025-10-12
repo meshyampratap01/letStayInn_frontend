@@ -16,7 +16,9 @@
         required
         #name="ngModel"
       />
-      <small *ngIf="name.invalid && name.touched" class="error">Name is required.</small>
+      <small *ngIf="name.invalid && name.touched" class="error"
+        >Name is required.</small
+      >
     </div>
 
     <div class="form-field">
@@ -30,7 +32,9 @@
         email
         #email="ngModel"
       />
-      <small *ngIf="email.invalid && email.touched" class="error">Valid email is required.</small>
+      <small *ngIf="email.invalid && email.touched" class="error"
+        >Valid email is required.</small
+      >
     </div>
 
     <div class="form-field">
@@ -62,11 +66,15 @@
         required
         #role="ngModel"
       ></p-dropdown>
-      <small *ngIf="role.invalid && role.touched" class="error">Role is required.</small>
+      <small *ngIf="role.invalid && role.touched" class="error"
+        >Role is required.</small
+      >
     </div>
 
     <div class="dialog-footer">
-      <button type="button" class="cancel-btn" (click)="closeDialog()">Cancel</button>
+      <button type="button" class="cancel-btn" (click)="closeDialog()">
+        Cancel
+      </button>
       <button
         type="submit"
         class="submit-btn"

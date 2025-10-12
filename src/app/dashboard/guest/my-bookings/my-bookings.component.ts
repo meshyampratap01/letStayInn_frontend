@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { TableModule } from 'primeng/table';
+import { SortableColumn, TableModule } from 'primeng/table';
 import { BookingDTO } from '../../../models/bookings';
 import { BookingService } from '../../../service/booking.service';
 import { ConfirmationService } from 'primeng/api';
@@ -18,11 +18,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     CommonModule,
     Toast,
     ConfirmDialogModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './my-bookings.component.html',
-  styleUrl: './my-bookings.component.scss'
+  styleUrl: './my-bookings.component.scss',
 })
 export class MyBookingsComponent {
   bookings: BookingDTO[] = [];
@@ -35,7 +35,7 @@ export class MyBookingsComponent {
     this.bookingService.activeBookings.subscribe({
       next: (res) => {
         this.bookings = res;
-      }
+      },
     });
   }
 
@@ -43,24 +43,23 @@ export class MyBookingsComponent {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this booking?',
       header: 'Confirm Deletion',
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.isLoading= true;
+        this.isLoading = true;
         this.bookingService.deleteBooking(bookingId).subscribe({
           next: (res) => {
-            this.isLoading=false;
+            this.isLoading = false;
             if (res.code === 200) {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Deleted',
-                detail: res.message
+                detail: res.message,
               });
-              this.bookings = this.bookings.filter(b => b.id !== bookingId);
+              this.bookings = this.bookings.filter((b) => b.id !== bookingId);
             } else {
               this.messageService.add({
                 severity: 'warn',
                 summary: 'Could not delete',
-                detail: res.message
+                detail: res.message,
               });
             }
           },
@@ -68,16 +67,17 @@ export class MyBookingsComponent {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: 'Failed to delete booking. Please try again.'
+              detail: 'Failed to delete booking. Please try again.',
             });
-          }
+          },
         });
       },
       rejectVisible: true,
-      acceptLabel: "Yes",
+      acceptLabel: 'Yes',
       rejectLabel: 'No',
       // acceptButtonStyleClass: 'custom-confirm-dialog',
       // rejectButtonStyleClass: 'custom-confirm-dialog',
     });
+    this.bookingService.getActiveBookings().subscribe();
   }
 }

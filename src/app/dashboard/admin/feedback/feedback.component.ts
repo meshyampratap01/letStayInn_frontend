@@ -76,7 +76,6 @@ export class FeedbackComponent {
       header: 'Confirmation',
       closable: true,
       closeOnEscape: true,
-      icon: 'pi pi-exclamation-triangle',
       rejectButtonProps: {
         label: 'No',
         severity: 'secondary',

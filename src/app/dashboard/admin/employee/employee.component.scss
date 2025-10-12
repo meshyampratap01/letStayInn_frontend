@@ -17,12 +17,13 @@
 
     .subtitle {
       margin: 0.2rem 0 0;
-      color: #666;
+      color: var(--subtitle-color);
       font-size: 0.95rem;
     }
 
     .add-employee-btn {
       background-color: #28a745;
+      border: none;
       color: white;
       font-weight: 500;
     }
@@ -35,12 +36,25 @@
       background-color: #f4f4f4;
       font-weight: 600;
       padding: 0.75rem;
+
+      ::ng-deep .p-sortable-column-icon {
+        display: none;
+      }
+
+      ::ng-deep p-sortIcon::after {
+        content: "unfold_more";
+        font-family: "Material Icons";
+        font-size: 18px;
+        color: #666;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
     }
 
     td {
       padding: 0.75rem;
       vertical-align: middle;
-    } 
+    }
 
     .role-label {
       background-color: #e0f7fa;
@@ -118,10 +132,9 @@
   // pointer-events: all;
 }
 
-
 .dialog-subtitle {
   font-size: 0.9rem;
-  color: #6c757d;
+  color: var(--subtitle-color);
   margin-bottom: 1rem;
   display: block;
 }
@@ -130,7 +143,7 @@
   margin-top: 1rem;
 
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 
     label {
       display: block;
@@ -148,4 +161,17 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    padding: var(--input-padding) 1rem;
+    border-radius: 4px;
+  }
+}
+
+::ng-deep .p-confirmdialog {
+  font-family: var(--font-family);
+  text-align: left;
 }

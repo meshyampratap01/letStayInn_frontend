@@ -117,7 +117,6 @@ export class RoomsComponent {
       header: 'Confirmation',
       closable: true,
       closeOnEscape: true,
-      icon: 'pi pi-exclamation-triangle',
       rejectButtonProps: {
         label: 'No',
         severity: 'secondary',
@@ -143,7 +142,7 @@ export class RoomsComponent {
             this.messageService.add({
               severity: 'error',
               summary: 'Some error Occured!',
-              detail: res.message,
+              detail: `Can't delete occupied Room!`,
               life: 3000,
             });
           },

@@ -1,29 +1,89 @@
+<p-toast></p-toast>
+
 <div class="signup-container">
-	<div class="signup-left">
-			<a class="signup-back" routerLink="/">
-				<span class="signup-back-arrow">&#8592;</span> Back
-			</a>
-			<img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hotel" class="signup-hotel-img"/>
-	</div>
-	<div class="signup-right">
-		<h2 class="signup-title">Sign up</h2>
-		<form>
-			<div class="signup-field">
-				<span class="signup-field-icon"><i class="material-icons">person</i></span>
-				<input type="text" placeholder="Your Name" class="signup-input" />
-			</div>
-			<div class="signup-field">
-				<span class="signup-field-icon"><i class="material-icons">mail_outline</i></span>
-				<input type="email" placeholder="Your Email" class="signup-input" />
-			</div>
-			<div class="signup-field">
-				<span class="signup-field-icon"><i class="material-icons">lock_outline</i></span>
-				<input type="password" placeholder="Password" class="signup-input" />
-			</div>
-			<button type="submit" class="signup-btn">Sign up</button>
-		</form>
-		<div class="signup-link">
-			<span>Already have an account? <a routerLink="/login">Login</a></span>
-		</div>
-	</div>
+  <!-- Left Side: Image & Back Button -->
+  <div class="signup-left">
+    <a class="signup-back" routerLink="/">
+      <span class="signup-back-arrow">&#8592;</span> Back
+    </a>
+    <img
+      src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt="Hotel"
+      class="signup-hotel-img"
+    />
+  </div>
+
+  <!-- Right Side: Signup Form -->
+  <div class="signup-right">
+    <h2 class="signup-title">Sign up</h2>
+    <form (ngSubmit)="signup(form)" #form="ngForm" novalidate>
+      <!-- Name -->
+      <div class="signup-field" [ngClass]="{ 'invalid': nameRef.invalid && nameRef.touched }">
+        <span class="signup-field-icon"><i class="material-icons">person</i></span>
+        <input
+          type="text"
+          class="signup-input"
+          placeholder="Your Name"
+          required
+          [(ngModel)]="name"
+          name="name"
+          #nameRef="ngModel"
+        />
+      </div>
+      <div class="error-message" *ngIf="nameRef.touched && nameRef.invalid">
+        <small *ngIf="nameRef.errors?.['required']">Name is required</small>
+      </div>
+
+      <!-- Email -->
+      <div class="signup-field" [ngClass]="{ 'invalid': emailRef.invalid && emailRef.touched }">
+        <span class="signup-field-icon"><i class="material-icons">mail_outline</i></span>
+        <input
+          type="email"
+          class="signup-input"
+          placeholder="Your Email"
+          required
+          email
+          [(ngModel)]="email"
+          name="email"
+          #emailRef="ngModel"
+        />
+      </div>
+      <div class="error-message" *ngIf="emailRef.touched && emailRef.invalid">
+        <small *ngIf="emailRef.errors?.['required']">Email is required</small>
+        <small *ngIf="emailRef.errors?.['email']">Enter a valid email</small>
+      </div>
+
+      <div class="signup-field" [ngClass]="{ 'invalid': passwordRef.invalid && passwordRef.touched }">
+        <span class="signup-field-icon"><i class="material-icons">lock_outline</i></span>
+        <input
+          type="password"
+          class="signup-input"
+          placeholder="Password"
+          required
+          minlength="8"
+          [(ngModel)]="password"
+          name="password"
+          #passwordRef="ngModel"
+        />
+      </div>
+      <div class="error-message" *ngIf="passwordRef.touched && passwordRef.invalid">
+        <small *ngIf="passwordRef.errors?.['required']">Password is required</small>
+        <small *ngIf="passwordRef.errors?.['minlength']">Minimum 8 characters</small>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="form.invalid || isSignupClicked()"
+        class="signup-btn"
+        [ngClass]="{'signup-btn': true, 'disabled-btn': form.invalid || isSignupClicked()}"
+      >
+        <span *ngIf="!isSignupClicked()">Sign up</span>
+        <i *ngIf="isSignupClicked()" class="pi pi-spin pi-spinner" style="font-size: 0.8rem; margin-left: 5px;"></i>
+      </button>
+    </form>
+
+    <div class="signup-link">
+      <span>Already have an account? <a routerLink="/login">Login</a></span>
+    </div>
+  </div>
 </div>

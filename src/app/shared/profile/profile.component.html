@@ -1,0 +1,51 @@
+    <app-header [userName]="userName" [userRole]="userRole"></app-header>
+    <div class="profile-wrapper">
+    <div class="header">
+        <!-- <button routerLink="../" class="back-link p-button p-button-text">← Back to Dashboard</button> -->
+        <h2>Profile Settings</h2>
+        <p class="subtitle">View and manage your account information</p>
+    </div>
+
+    <p-card class="profile-card">
+        <div class="profile-top">
+        <div class="avatar">{{ userInitials }}</div>
+        <div class="user-info">
+            <h3>{{ user?.name }}</h3>
+            <p>{{ user?.email }}</p>
+            <p-tag value="{{ user?.role }}" severity="info"></p-tag>
+        </div>
+        <!-- <button pButton type="button" label="Edit Profile" class="edit-btn" (click)="editProfile()"></button> -->
+        </div>
+
+        <div class="section">
+        <h4>Account Information</h4>
+        <div class="field-grid">
+            <div class="field">
+            <label>Full Name</label>
+            <!-- <input pInputText type="text" [value]="user?.name" disabled /> -->
+             <span>{{user?.name}}</span>
+            </div>
+            <div class="field">
+            <label>Email Address</label>
+            <!-- <input pInputText type="email" [value]="user?.email" disabled /> -->
+             <span>{{user?.email}}</span>
+            </div>
+        </div>
+        </div>
+
+        <div class="section">
+        <h4>Account Details</h4>
+        <div class="field-grid">
+            <div class="field">
+             <label>Account Type</label>
+            <!--<input pInputText type="text" [value]="user?.role" disabled /> -->
+            <span>{{user?.role}}</span>
+            </div>
+        </div>
+        </div>
+
+        <p class="footer-note">
+        For updates or other settings, please contact support.
+        </p>
+    </p-card>
+    </div>

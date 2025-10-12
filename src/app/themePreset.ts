@@ -1,4 +1,3 @@
-
 import { definePreset } from "@primeng/themes";
 import Aura from "@primeng/themes/aura";
 
@@ -61,7 +60,40 @@ export const customPreset = definePreset(Aura, {
         //   textColor: "#e0e7ff",
         //   subtitleColor: "#c0c0c0"
         }
-      }
+      },
+    }
+  },
+   components: {
+    confirmdialog: {
+      css: `
+        .p-confirm-dialog {
+          text-align: center;
+          background-color: red;
+        }
+ 
+        .p-confirm-dialog .p-dialog-header {
+          font-size: 1.4rem;
+          font-weight: bold;
+          color: #2196F3;
+          justify-content: center;
+        }
+ 
+        .p-confirm-dialog .p-confirm-dialog-message {
+          font-size: 1.1rem;
+          color: #555;
+          text-align: center;
+        }
+ 
+        .p-confirm-dialog .p-confirm-dialog-accept {
+          background-color: #28a745;
+          border: none;
+        }
+ 
+        .p-confirm-dialog .p-confirm-dialog-reject {
+          background-color: #dc3545;
+          border: none;
+        }
+      `
     }
   }
 });

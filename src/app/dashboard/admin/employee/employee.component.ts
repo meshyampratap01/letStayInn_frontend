@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { Employee, EmployeeService } from '../../../service/employee.service';
@@ -150,7 +150,6 @@ export class EmployeeComponent {
       header: 'Confirmation',
       closable: true,
       closeOnEscape: true,
-      icon: 'pi pi-exclamation-triangle',
       rejectButtonProps: {
         label: 'No',
         severity: 'secondary',

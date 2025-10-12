@@ -1,0 +1,133 @@
+.profile-wrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: var(--font-family);
+
+  .header {
+    text-align: left;
+    margin-bottom: 2rem;
+
+    .back-link {
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      color: #6c757d;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .profile-card {
+    padding: 2rem;
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+
+      .avatar {
+        background-color: #007ad9;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-info {
+        flex: 1;
+        margin-left: 1.5rem;
+
+        h3 {
+          margin: 0;
+          font-size: 1.5rem;
+        }
+
+        p {
+          margin: 0.25rem 0;
+        }
+      }
+
+      .edit-btn {
+        margin-left: auto;
+        white-space: nowrap;
+      }
+    }
+
+    .section {
+      margin-bottom: 2rem;
+
+      h4 {
+        margin-bottom: 1rem;
+        color: #495057;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-top: 1rem;
+    }
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  span {
+    // padding: 0.75rem 1rem;
+    padding-left: 0.2rem;
+    background-color: #f4f4f5;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #333;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  span:hover {
+    background-color: #e9ecef;
+    cursor: default;
+  }
+}

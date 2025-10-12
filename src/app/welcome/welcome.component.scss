@@ -7,10 +7,10 @@ $subtitle: #4a4a4ac6;
 $border-radius: 16px;
 
 .welcome-container {
-	background: $background;
+	background: var(--background-color);
 	color: $text;
 	min-height: 100vh;
-	font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+	font-family: var(--font-family);
 }
 
 .hero-section {
@@ -18,8 +18,7 @@ $border-radius: 16px;
 	color: #fff;
 	text-align: center;
 	padding: 64px 16px 48px 16px;
-	// border-radius: 0 0 $border-radius $border-radius;
-	box-shadow: 0 4px 24px rgba(23, 105, 255, 0.12);
+	box-shadow: var(--card-shadow);
 	h1 {
 		font-size: 2.9rem;
 		font-weight: 600;
@@ -41,13 +40,13 @@ $border-radius: 16px;
   	}
 	.primary-btn {
 		background: #fff;
-		color: $primary;
+		color: var(--primary-color);
 		border: none;
 		border-radius: 8px;
 		padding: 12px 32px;
 		font-size: 1.1rem;
 		font-weight: 500;
-		box-shadow: 0 2px 8px rgba(23, 105, 255, 0.08);
+		box-shadow: var(--card-shadow);
 		cursor: pointer;
 		margin: 0 8px 0 0;
 		transition: background 0.2s;
@@ -55,7 +54,6 @@ $border-radius: 16px;
 			background: #e0e7ff;
 		}
 	}
-		// ...existing code...
 }
 
 .services-section {
@@ -92,7 +90,7 @@ $border-radius: 16px;
 				transform: translate3d(0, -2px, 2px);
 			}
 			.service-icon {
-				color: $primary;
+				color: var(--primary-color);
 				font-size: 2.2rem;
 				margin-bottom: 12px;
 			}
@@ -102,7 +100,7 @@ $border-radius: 16px;
 				margin-bottom: 8px;
 			}
 			p {
-				color: $subtitle;
+				color: var(--subtitle-color);
 				font-size: 0.98rem;
 			}
 		}
@@ -123,9 +121,9 @@ $border-radius: 16px;
 		justify-content: center;
 		gap: 32px;
 		.access-card {
-			background: $card-bg;
-			box-shadow: $card-shadow;
-			border-radius: $border-radius;
+			background: var(--card-bg);
+			box-shadow: var(--card-shadow);
+			border-radius: var(--border-radius);
 			padding: 32px 24px;
 			width: 260px;
 			min-height: 220px;
@@ -147,16 +145,14 @@ $border-radius: 16px;
 				margin-bottom: 8px;
 			}
 			p {
-				color: $subtitle;
+				color: var(--subtitle-color);
 				font-size: 0.95rem;
 				margin-bottom: 16px;
 			}
 			ul {
-				// list-style: none;
 				padding: 0;
 				margin: 0;
 				list-style-type: disc;
-				// list-style: disc;
 				li {
 					font-size: 0.88rem;
 					color: $subtitle;
@@ -172,7 +168,6 @@ $border-radius: 16px;
 	color: #fff;
 	text-align: center;
 	padding: 48px 16px 64px 16px;
-	// border-radius: $border-radius $border-radius 0 0;
 	h2 {
 		font-size: 1.5rem;
 		font-weight: 500;
@@ -184,7 +179,7 @@ $border-radius: 16px;
 	}
 	.primary-btn {
 		background: #fff;
-		color: $primary;
+		color: var(--primary-color);
 		border: none;
 		border-radius: 8px;
 		padding: 12px 32px;
@@ -198,5 +193,3 @@ $border-radius: 16px;
 		}
 	}
 }
-
-// ...existing code...

@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { employee } from '../models/employee';
 import { response } from '../models/response';
 import { BehaviorSubject, tap } from 'rxjs';
+import { svcRequest } from '../models/service_request';
 
 export type Employee = {
   name: string;
@@ -22,6 +23,7 @@ export class EmployeeService {
   employees = new BehaviorSubject<employee[]>([]);
   _availableEmployee = new BehaviorSubject<number>(0);
   _unavailableEmployee = new BehaviorSubject<number>(0);
+  _assignedServiceReqeust = new BehaviorSubject<svcRequest[]>([]);
 
 
   constructor() { }
@@ -69,4 +71,24 @@ export class EmployeeService {
     return this.httpClient.post(url,{employee_id:payload.employeeId});
   }
 
+  getAssignedServiceRequest(){
+    const url = 'employee/service-requests';
+    return this.httpClient.get<response>(url).pipe(
+      tap((res)=>{
+        this._assignedServiceReqeust.next(res.data);
+      })
+    );
+  }
+
+  toggleAvailabilityStatus(){
+    const url = `employee/availability`;
+    return this.httpClient.put<response>(url,{});
+  }
+
+  updateRequestStatus(request: svcRequest,status: any){
+    const url = `employee/service-requests/${request.id}/status`
+    return this.httpClient.put(url,{
+      status: status.value
+    })
+  }
 }

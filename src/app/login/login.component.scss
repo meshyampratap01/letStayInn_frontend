@@ -1,17 +1,10 @@
 @import "primeicons/primeicons.css";
 
-$primary: #1769ff;
-$background: #f8f9fa;
-$card-bg: #fff;
-$card-shadow: 0 2px 12px rgba(23, 105, 255, 0.08);
-$text: #222;
-$border-radius: 16px;
-
 .login-container {
     display: flex;
     min-height: 100vh;
-    background: $background;
-    font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+    background: var(--background-color);
+    font-family: var(--font-family);
     overflow: hidden;
 }
 
@@ -19,23 +12,11 @@ $border-radius: 16px;
   margin-left: 30px;
   transition: all 0.2s ease;
   font-weight: lighter;
-  // margin-bottom: 15px;
-  // font-weight: 100;
 
   &::after{
   font-weight: lighter;
   }
 }
-
-// .login-left {
-//   flex: 1;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   background: #fff;
-//   position: relative;
-// }
 
 
 .login-left {
@@ -71,7 +52,6 @@ $border-radius: 16px;
   left: 0;
   width: 100%;
   height: 100%;
-//   background: linear-gradient(135deg, rgba(23,105,255,0.08) 0%, rgba(255,255,255,0.5) 100%);
   z-index: 2;
 }
 
@@ -79,7 +59,7 @@ $border-radius: 16px;
   position: absolute;
   top: 32px;
   left: 32px;
-  color: $primary;
+  color: var(--primary-color);
   font-size: 1rem;
   text-decoration: none;
   display: flex;
@@ -92,75 +72,25 @@ $border-radius: 16px;
   transition: all 0.2s ease;
   &:hover {
     text-decoration: none;
-    color: darken($primary, 10%);
+    color:var(--primary-color-dark);
     transform: scale(1.1);
   }
 }
 
 .login-back-arrow {
   font-size: 1.2rem;
-//   &:hover {
-//     text-decoration: none;
-//     color: darken($primary, 10%);
-//     transform: scale(1.1);
-//   }
 }
 
 .login-welcome-card {
   background: linear-gradient(135deg, #e0e7ff 0%, #f3eaff 100%);
-  border-radius: $border-radius;
-  box-shadow: $card-shadow;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
   padding: 48px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 32px;
 }
-
-// ::ng-deep .p-toast {
-//   z-index: 9999;
-//   font-family: "Segoe UI", "Roboto", Arial, sans-serif;
-
-//   .p-toast-message {
-//     background: $primary;
-//     color: #fff;
-//     border: none;
-//     border-radius: $border-radius;
-//     box-shadow: $card-shadow;
-//     padding: 1rem 1.5rem;
-//     font-size: 1rem;
-//     display: flex;
-//     align-items: center;
-
-//     .p-toast-message-content {
-//       flex: 1; 
-//     }
-
-//     .p-toast-summary {
-//       font-weight: 600;
-//       font-size: 1.05rem;
-//     }
-
-//     .p-toast-detail {
-//       font-size: 0.95rem;
-//       margin-top: 0.25rem;
-//       opacity: 0.9;
-//     }
-
-//     .p-toast-icon-close {
-//       color: #fff;
-//       opacity: 0.8;
-//       margin-left: 1rem;
-//       transition: opacity 0.2s ease;
-
-//       &:hover {
-//         opacity: 1;
-//       }
-//     }
-//   }
-// }
-
-
 
 .login-icon {
   display: flex;
@@ -170,7 +100,7 @@ $border-radius: 16px;
 }
 
 .login-welcome-text {
-  color: $text;
+  color: var(--text-color);
   font-size: 1.2rem;
   font-weight: 500;
   margin-top: 8px;
@@ -182,7 +112,7 @@ $border-radius: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $background;
+  background: var(--background-color);
   animation: fadeIn 0.5s ease;
 }
 
@@ -202,7 +132,7 @@ $border-radius: 16px;
   font-weight: 600;
   margin-bottom: 32px;
   margin-top: 32px;
-  color: $text;
+  color: var(--text-color);
 }
 
 form {
@@ -216,9 +146,9 @@ form {
 .login-field {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 8px;
-  box-shadow: $card-shadow;
+  box-shadow: var(--card-shadow);
   padding: 12px 16px;
   gap: 12px;
 }
@@ -226,7 +156,7 @@ form {
 .login-field-icon {
   font-size: 1.3rem;
   margin-top: 4.5px;
-  color: $primary;
+  color: var(--primary-color);
 }
 
 .login-input {
@@ -235,12 +165,12 @@ form {
   font-size: 1rem;
   background: transparent;
   flex: 1;
-  color: $text;
+  color: var(--text-color);
   padding: 8px 0;
 }
 
 .login-btn {
-  background: $primary;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -248,12 +178,12 @@ form {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: $card-shadow;
+  box-shadow: var(--card-shadow);
   margin-top: 8px;
   transition: background 0.2s;
   width: 100%;
   &:hover {
-    background: darken($primary, 10%);
+    background:var(--primary-color-dark);
   }
 }
 
@@ -261,20 +191,16 @@ form {
   margin-top: 24px;
   text-align: center;
   a {
-    color: $primary;
-    // text-decoration: underline;
+    color: var(--primary-color);
     font-size: 1rem;
     font-weight: 500;
-    // cursor: pointer;
   }
   span {
     text-decoration: underline;
     cursor: pointer;
 
     &:hover{
-      color: darken($primary,10%);
-      // z-index: ;
-      // transform: scale(1.1);
+      color: var(--primary-color-dark)
     }
   }
 }
@@ -308,7 +234,6 @@ form {
   color: red;
   font-size: 0.75rem;
   margin-top: -21px;
-  padding-left: 35px;
   visibility: hidden;
 }
 

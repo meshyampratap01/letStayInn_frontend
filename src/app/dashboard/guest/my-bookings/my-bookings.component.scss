@@ -27,6 +27,19 @@
       background-color: #f5f5f5;
       font-weight: 600;
       padding: 0.75rem;
+
+            ::ng-deep .p-sortable-column-icon{
+        display: none;
+      }
+
+      ::ng-deep p-sortIcon::after {
+        content: 'unfold_more';
+        font-family: 'Material Icons';
+        font-size: 18px;
+        color: #666;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
     }
 
     td {
@@ -127,4 +140,9 @@
   align-items: center;
   justify-content: center;
   // pointer-events: all;
+}
+
+::ng-deep .p-confirmdialog {
+  font-family: var(--font-family);
+  text-align: left;
 }

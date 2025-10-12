@@ -4,6 +4,7 @@ import { Roles, User } from '../models/user';
 import { loginResponse, payload } from '../models/login';
 import { catchError, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { response } from '../models/response';
 
 @Injectable({
   providedIn: 'root',
@@ -69,5 +70,14 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  signup(name:string, email: string, password:string){
+    const url= `signup`;
+    return this.httpClient.post<response>(url,{
+      name: name,
+      email:email,
+      password:password,
+    })
   }
 }

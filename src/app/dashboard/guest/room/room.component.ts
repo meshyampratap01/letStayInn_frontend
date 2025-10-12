@@ -45,7 +45,7 @@ export class RoomComponent {
   };
 
   rooms: room[] = [];
-  roomOptions: any[] = [];
+  roomOptions: room[] = [];
 
   checkInDate: string | null = null;
   checkOutDate: string | null = null;
@@ -55,13 +55,10 @@ export class RoomComponent {
   errorMessage: string = '';
 
   constructor() {
-    this.roomService.loadRooms().subscribe({
+    this.roomService.loadRooms().subscribe();
+    this.roomService.rooms.subscribe({
       next: (res) => {
-        this.rooms = res.data;
-        // this.roomOptions = this.rooms.map((room) => ({
-        //   label: `Room ${room.number} - ${room.type}`,
-        //   value: room,
-        // }));
+        this.rooms = res;
         this.roomOptions = this.rooms;
       },
     });
@@ -95,12 +92,12 @@ export class RoomComponent {
       return;
     }
 
-    this.isLoading=true;
+    this.isLoading = true;
     this.bookingService
       .bookRoom(this.selectedRoom.number, this.checkInDate, this.checkOutDate)
       .subscribe({
         next: (res) => {
-          this.isLoading=false;
+          this.isLoading = false;
           if (res.code === 201) {
             this.bookingService.getActiveBookings().subscribe();
             this.messageService.add({
@@ -108,6 +105,7 @@ export class RoomComponent {
               summary: 'Booking Successful',
               detail: res.message,
             });
+            this.roomService.loadRooms().subscribe();
             this.bookingDialogVisible = false;
             this.checkInDate = null;
             this.checkOutDate = null;
@@ -120,7 +118,7 @@ export class RoomComponent {
           }
         },
         error: (err) => {
-          this.isLoading=false;
+          this.isLoading = false;
           this.messageService.add({
             severity: 'error',
             summary: 'Booking Failed',
@@ -128,5 +126,18 @@ export class RoomComponent {
           });
         },
       });
+  }
+
+  validateDates() {
+    if (!this.checkInDate || !this.checkOutDate) {
+      this.errorMessage = '';
+      return;
+    }
+
+    if (this.checkOutDate <= this.checkInDate) {
+      this.errorMessage = 'Check-out date must be after check-in date.';
+    } else {
+      this.errorMessage = '';
+    }
   }
 }

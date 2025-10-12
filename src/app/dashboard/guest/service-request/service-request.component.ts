@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
+import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { Component, inject } from '@angular/core';
 import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
@@ -25,7 +25,7 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     DialogModule,
     DropdownModule,
-    ButtonModule
+    ButtonModule,
   ],
   providers: [MessageService],
   templateUrl: './service-request.component.html',
@@ -46,7 +46,7 @@ export class ServiceRequestComponent {
   requestDialogVisible = false;
 
   selectedRoom: any = null;
-  selectedType: any = '';
+  selectedType: string = '';
   requestDetails: string = '';
 
   user = this.authService.user();
@@ -56,7 +56,9 @@ export class ServiceRequestComponent {
 
     this.adminService.serviceRequests.subscribe({
       next: (res) => {
-        this.serviceRequests = res.filter(val => this.user?.ID === val.user_id);
+        this.serviceRequests = res.filter(
+          (val) => this.user?.ID === val.user_id
+        );
       },
     });
 
@@ -66,9 +68,9 @@ export class ServiceRequestComponent {
       next: (bookings) => {
         this.roomOptions = bookings.map((b) => ({
           label: `Room ${b.room_number}`,
-          value: b.room_number
+          value: b.room_number,
         }));
-      }
+      },
     });
   }
 
@@ -79,57 +81,70 @@ export class ServiceRequestComponent {
     this.requestTypeOptions = [{ label: type, value: type }];
     this.requestDialogVisible = true;
   }
-
-  requestCleaning() {
-    this.openDialog('Cleaning');
-  }
-
-  orderFood() {
-    this.openDialog('Food');
-  }
-
+  
   submitRequest() {
-    if (!this.selectedRoom || !this.selectedType || !this.requestDetails.trim()) {
+    if (
+      !this.selectedRoom ||
+      !this.selectedType ||
+      !this.requestDetails.trim()
+    ) {
       this.messageService.add({
         severity: 'warn',
         summary: 'Incomplete Form',
-        detail: 'Please fill in all fields before submitting.'
+        detail: 'Please fill in all fields before submitting.',
       });
       return;
     }
 
     const payload = {
       room_number: this.selectedRoom.value,
-      type: this.selectedType.value,
-      details: this.requestDetails
+      type: this.selectedType,
+      details: this.requestDetails,
     };
 
     this.isLoading = true;
 
-    this.roomService.submitRequest(payload.room_number, payload.type, payload.details).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.requestDialogVisible = false;
+    this.roomService
+      .submitRequest(payload.room_number, payload.type, payload.details)
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.requestDialogVisible = false;
 
-        this.selectedRoom = null;
-        this.selectedType = '';
-        this.requestDetails = '';
+          this.selectedRoom = null;
+          this.selectedType = '';
+          this.requestDetails = '';
 
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Request Submitted',
-          detail: 'Your service request has been submitted successfully.'
-        });
-        this.adminService.loadServiceRequest().subscribe();
-      },
-      error: () => {
-        this.isLoading = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Submission Failed',
-          detail: 'Something went wrong. Please try again.'
-        });
-      }
-    });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Request Submitted',
+            detail: 'Your service request has been submitted successfully.',
+          });
+          this.adminService.loadServiceRequest().subscribe();
+        },
+        error: () => {
+          this.isLoading = false;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Submission Failed',
+            detail: 'Something went wrong. Please try again.',
+          });
+        },
+      });
+  }
+
+  requestService() {
+    this.selectedRoom = null;
+    // this.selectedType = type;
+    this.requestDetails = '';
+    this.requestTypeOptions = [
+      { label: 'Cleaning', value: 'Cleaning' },
+      { label: 'Food', value: 'Food' },
+    ];
+    this.requestDialogVisible = true;
+  }
+
+  onSelectService(event: DropdownChangeEvent){
+    this.selectedType= event.value.value;
   }
 }

@@ -1,13 +1,4 @@
-$primary-color: #007ad9;
-$secondary-color: #e0e0e0;
-$danger-color: #ef4444;
-$text-color: #333;
-$subtitle-color: #6c757d;
-$background-color: #fdfdfd;
-$border-radius: 8px;
-$input-padding: 0.5rem;
-$font-size: 0.95rem;
-$table-header-bg: #f4f4f4;
+@import "primeicons/primeicons.css";
 
 .room-management {
   padding: 2rem;
@@ -27,11 +18,11 @@ $table-header-bg: #f4f4f4;
     .subtitle {
       margin: 0.2rem 0 0;
       color: #666;
-      font-size: $font-size;
+      font-size: var(--font-size);
     }
 
     .add-room-btn {
-      background-color: $primary-color;
+      background-color: var(--primary-color);
       color: white;
       font-weight: 500;
     }
@@ -41,9 +32,23 @@ $table-header-bg: #f4f4f4;
     width: 100%;
 
     th {
-      background-color: $table-header-bg;
+      background-color: var(--table-header-bg);
       font-weight: 600;
       padding: 0.75rem;
+      position: relative;
+
+      ::ng-deep .p-sortable-column-icon{
+        display: none;
+      }
+
+      ::ng-deep p-sortIcon::after {
+        content: 'unfold_more';
+        font-family: 'Material Icons';
+        font-size: 18px;
+        color: #666;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
     }
 
     td {
@@ -67,14 +72,6 @@ $table-header-bg: #f4f4f4;
       font-size: 0.85rem;
     }
 
-    .status-maintenance {
-      background-color: #f2dede;
-      color: #a94442;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
-    }
-
     .actions {
       display: flex;
       gap: 0.5rem;
@@ -82,7 +79,7 @@ $table-header-bg: #f4f4f4;
       .icon-btn {
         background-color: #f0f0f0;
         border: none;
-        border-radius: $border-radius;
+        border-radius: 8px;
         width: 36px;
         height: 36px;
         display: flex;
@@ -93,36 +90,34 @@ $table-header-bg: #f4f4f4;
 
         i.material-icons {
           font-size: 20px;
-          // color: $text-color;
         }
 
         &:hover {
-          background-color: $secondary-color;
+          background-color: var(--secondary-color);
         }
       }
 
       .edit-btn {
-        color: $primary-color;
+        color: var(--primary-color);
       }
 
       .delete-btn {
-        color: $danger-color;
+        color: var(--danger-color);
       }
     }
   }
 }
 
-// Dialog styles
 .custom-dialog-content {
   padding: 1.5rem;
-  background-color: $background-color;
-  border-radius: $border-radius;
+  background-color: var(--background-color);
+  border-radius: 8px;
 
   .dialog-subtitle {
     display: block;
     margin-bottom: 1rem;
-    color: $subtitle-color;
-    font-size: $font-size;
+    color: var(--subtitle-color);
+    font-size: var(--font-size);
   }
 
   .dialog-form {
@@ -137,17 +132,17 @@ $table-header-bg: #f4f4f4;
       label {
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: $text-color;
+        color: var(--text-color);
       }
 
       .custom-input,
       .custom-input-number,
       .custom-textarea {
         width: 100%;
-        padding: $input-padding;
+        padding: var(--input-padding);
         border-radius: 6px;
         border: 1px solid #ccc;
-        font-size: $font-size;
+        font-size: var(--font-size);
       }
 
       .custom-input-number {
@@ -166,23 +161,22 @@ $table-header-bg: #f4f4f4;
     margin-top: 1.5rem;
 
     .btn-primary {
-      background-color: $primary-color;
+      background-color: var(--primary-color);
       color: white;
       border: none;
-      padding: $input-padding 1rem;
+      padding: var(--input-padding) 1rem;
       border-radius: 4px;
     }
 
     .btn-secondary {
-      background-color: $secondary-color;
-      color: $text-color;
+      background-color: transparent;
+      color: var(--text-color);
       border: none;
-      padding: $input-padding 1rem;
+      padding: var(--input-padding) 1rem;
       border-radius: 4px;
     }
   }
 }
-
 
 .loading-overlay {
   position: fixed;
@@ -195,5 +189,9 @@ $table-header-bg: #f4f4f4;
   display: flex;
   align-items: center;
   justify-content: center;
-  // pointer-events: all;
+}
+
+::ng-deep .p-confirmdialog {
+  font-family: var(--font-family);
+  text-align: left;
 }

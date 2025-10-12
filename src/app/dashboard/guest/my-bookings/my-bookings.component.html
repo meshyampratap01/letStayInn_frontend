@@ -2,9 +2,14 @@
 <p-confirmDialog></p-confirmDialog>
 
 @if(isLoading){
-    <div class="loading-overlay">
-        <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
-    </div>
+<div class="loading-overlay">
+  <p-progress-spinner
+    strokeWidth="3"
+    fill="transparent"
+    animationDuration=".5s"
+    [style]="{ width: '50px', height: '50px' }"
+  />
+</div>
 }
 
 <div class="my-bookings">
@@ -16,35 +21,51 @@
   </div>
 
   <p-table [value]="bookings" class="booking-table" responsiveLayout="scroll">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Room Number</th>
-        <th>Check-In</th>
-        <th>Check-Out</th>
-        <th>Status</th>
-        <th>Requests</th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="room_number">
+            Room Number <p-sortIcon field="room_number"></p-sortIcon>
+          </th>
+          <th pSortableColumn="check_in">
+            Check-In <p-sortIcon field="check_in"></p-sortIcon>
+          </th>
+          <th pSortableColumn="check_out">
+            Check-Out <p-sortIcon field="check_out"></p-sortIcon>
+          </th>
+          <th pSortableColumn="status">
+            Status <p-sortIcon field="status"></p-sortIcon>
+          </th>
+          <th>Requests</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
 
     <ng-template pTemplate="body" let-booking>
       <tr>
         <td>{{ booking.room_number }}</td>
-        <td>{{ booking.check_in | date: 'dd MMM yyyy' }}</td>
-        <td>{{ booking.check_out | date: 'dd MMM yyyy' }}</td>
+        <td>{{ booking.check_in | date : "dd MMM yyyy" }}</td>
+        <td>{{ booking.check_out | date : "dd MMM yyyy" }}</td>
         <td>
-          <span [ngClass]="{
-            'status-active': booking.status === 'active',
-            'status-completed': booking.status === 'completed',
-            'status-cancelled': booking.status === 'cancelled'
-          }">
+          <span
+            [ngClass]="{
+              'status-active': booking.status === 'active',
+              'status-completed': booking.status === 'completed',
+              'status-cancelled': booking.status === 'cancelled'
+            }"
+          >
             {{ booking.status | titlecase }}
           </span>
         </td>
         <td>
-          <i *ngIf="booking.food_req" class="material-icons request-icon food">restaurant</i>
-          <i *ngIf="booking.clean_req" class="material-icons request-icon clean">cleaning_services</i>
-          <span *ngIf="!booking.food_req && !booking.clean_req">NO REQUESTS</span>
+          <i *ngIf="booking.food_req" class="material-icons request-icon food"
+            >restaurant</i
+          >
+          <i *ngIf="booking.clean_req" class="material-icons request-icon clean"
+            >cleaning_services</i
+          >
+          <span *ngIf="!booking.food_req && !booking.clean_req"
+            >NO REQUESTS</span
+          >
         </td>
         <td class="actions">
           <button class="delete-btn" (click)="confirmDelete(booking.id)">

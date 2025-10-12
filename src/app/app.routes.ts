@@ -8,6 +8,8 @@ import { GuestComponent } from './dashboard/guest/guest.component';
 import { authGuard } from './guard/auth.guard';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { adminGuard } from './guard/admin.guard';
+import { EmployeeComponent } from './dashboard/employee/employee.component';
+import { ProfileComponent } from './shared/profile/profile.component';
 // import { RoomsComponent } from './dashboard/admin/rooms/rooms.component';
 // import { EmployeeComponent } from './dashboard/admin/employee/employee.component';
 
@@ -64,7 +66,7 @@ export const routes: Routes = [
     children: [
       {
         path:'',
-        redirectTo: 'my-bookings',
+        redirectTo: 'book-room',
         pathMatch: "prefix",
       },
       {
@@ -90,8 +92,17 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'employee',
+    component: EmployeeComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'logout',
     component: LoginComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   {
     path: 'unauthorized',

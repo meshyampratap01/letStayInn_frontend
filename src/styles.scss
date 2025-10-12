@@ -1,6 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+$primary-color: #007ad9;
+$secondary-color: #e0e0e0;
+$danger-color: #ef4444;
+$text-color: #333;
+$subtitle-color: #6c757d;
+$background-color: #fdfdfd;
+$border-radius: 8px;
+$input-padding: 0.5rem;
+$font-size: 0.95rem;
+$table-header-bg: #f4f4f4;
+
+:root {
+  --primary-color: #007ad9;
+  --primary-color-dark: #025ea5;
+  --secondary-color: #e0e0e0;
+  --danger-color: #ef4444;
+  --text-color: #333;
+  --subtitle-color: #6c757d;
+  --background-color: #fdfdfd;
+  --border-radius: 16px;
+  --input-padding: 0.5rem;
+  --font-size: 0.95rem;
+  --table-header-bg: #f4f4f4;
+
+  --font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+
+  --card-bg: #fff;
+  --card-shadow: 0 2px 12px rgba(23, 105, 255, 0.08);
+  --input-padding: 0.5rem;
+
+  --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }

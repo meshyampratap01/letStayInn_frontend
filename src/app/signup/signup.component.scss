@@ -1,15 +1,10 @@
-$primary: #1769ff;
-$background: #f8f9fa;
-$card-bg: #fff;
-$card-shadow: 0 2px 12px rgba(23, 105, 255, 0.08);
-$text: #222;
-$border-radius: 16px;
+@import "primeicons/primeicons.css";
 
 .signup-container {
   display: flex;
   min-height: 100vh;
-  background: $background;
-  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: var(--background-color);
+  font-family: var(--font-family);
   overflow: hidden;
 }
 
@@ -19,30 +14,14 @@ $border-radius: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: var(--card-bg);
   position: relative;
   overflow: hidden;
 }
 
-// .signup-back {
-//   position: absolute;
-//   top: 32px;
-//   left: 32px;
-//   // color: $primary;
-//   font-size: 1rem;
-//   text-decoration: none;
-//   display: flex;
-//   align-items: center;
-//   gap: 4px;
-//   font-weight: 500;
-//   cursor: pointer;
-//   // z-index: 2;
-// }
-
 .signup-welcome-card {
-  background: linear-gradient(135deg, #e0e7ff 0%, #f3eaff 100%);
-  border-radius: $border-radius;
-  box-shadow: $card-shadow;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
   padding: 48px 32px;
   display: flex;
   flex-direction: column;
@@ -58,7 +37,7 @@ $border-radius: 16px;
 }
 
 .signup-welcome-text {
-  color: $text;
+  color: var(--text-color);
   font-size: 1.2rem;
   font-weight: 500;
   margin-top: 8px;
@@ -68,7 +47,7 @@ $border-radius: 16px;
   position: absolute;
   top: 32px;
   left: 32px;
-  color: $primary;
+  color: var(--primary-color);
   font-size: 1rem;
   text-decoration: none;
   display: flex;
@@ -81,18 +60,13 @@ $border-radius: 16px;
   transition: all 0.2s ease;
   &:hover {
     text-decoration: none;
-    color: darken($primary, 10%);
+    color: var(--primary-color-dark);
     transform: scale(1.1);
   }
 }
 
 .signup-back-arrow {
   font-size: 1.2rem;
-  // &:hover {
-  //   text-decoration: none;
-  //   color: darken($primary, 10%);
-  //   transform: scale(1.1);
-  // }
 }
 
 .signup-hotel-img {
@@ -100,7 +74,6 @@ $border-radius: 16px;
   height: 100%;
   object-fit: cover;
   border-radius: 0;
-  box-shadow: 0 8px 32px rgba(23, 105, 255, 0.18);
   position: absolute;
   top: 0;
   left: 0;
@@ -117,7 +90,6 @@ $border-radius: 16px;
   left: 0;
   width: 100%;
   height: 100%;
-//   background: linear-gradient(135deg, rgba(23,105,255,0.08) 0%, rgba(255,255,255,0.5) 100%);
   z-index: 2;
 }
 
@@ -127,7 +99,7 @@ $border-radius: 16px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $background;
+  background: var(--background-color);
   animation: fadeIn 0.5s ease;
 }
 
@@ -147,7 +119,7 @@ $border-radius: 16px;
   font-weight: 600;
   margin-bottom: 32px;
   margin-top: 32px;
-  color: $text;
+  color: var(--text-color);
 }
 
 form {
@@ -161,9 +133,9 @@ form {
 .signup-field {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 8px;
-  box-shadow: $card-shadow;
+  box-shadow: var(--card-shadow);
   padding: 12px 16px;
   gap: 12px;
 }
@@ -171,7 +143,7 @@ form {
 .signup-field-icon {
   margin-top: 5px;
   font-size: 1.3rem;  
-  color: $primary;
+  color: var(--primary-color);
 }
 
 .signup-input {
@@ -180,43 +152,57 @@ form {
   font-size: 1rem;
   background: transparent;
   flex: 1;
-  color: $text;
+  color: var(--text-color);
   padding: 8px 0;
 }
 
 .signup-btn {
-  background: $primary;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--card-bg);
   border: none;
   border-radius: 8px;
   padding: 14px 0;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: $card-shadow;
+  box-shadow: var(--card-shadow);
   margin-top: 8px;
   transition: background 0.2s;
   width: 100%;
   &:hover {
-    // cursor: pointer;
-    background: darken($primary, 10%);
+    background: var(--primary-color-dark);
   }
+}
+
+.disabled-btn {
+  background: #1768ff61;
+  &:hover{
+  background: #1768ff61;
+  }
+}
+
+
+.error-message {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: -21px;
+  margin-bottom: -21px;
+  visibility: visible; 
 }
 
 .signup-link {
   margin-top: 24px;
   text-align: center;
   span{
-    color: $primary;
+    color: var(--primary-color);
     font-weight: 500;
   }
   a{
-    color: $primary;
-    // text-decoration: underline;
+    color: var(--primary-color);
     font-size: 1rem;
     font-weight: 500;
     &:hover{
-      color: darken($primary,10%);
+      color: var(--primary-color-dark);
     }
   }
 }

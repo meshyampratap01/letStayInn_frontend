@@ -8,43 +8,79 @@
   <form class="dialog-form" #roomForm="ngForm">
     <div class="form-field">
       <label for="roomNumber">Room Number</label>
-      <input id="roomNumber" name="roomNumber" type="number" [(ngModel)]="room.number" required min="1"
-        #roomNumber="ngModel" />
+      <input
+        id="roomNumber"
+        name="roomNumber"
+        type="number"
+        [(ngModel)]="room.number"
+        required
+        min="1"
+        #roomNumber="ngModel"
+      />
       <small *ngIf="roomNumber.invalid && roomNumber.touched" class="error">
         Room number must be greater than zero.
       </small>
     </div>
 
-
     <div class="form-field">
       <label for="roomType">Type</label>
 
-      <p-dropdown id="roomType" name="roomType" [options]="roomTypeOptions" [(ngModel)]="room.type" optionLabel="label"
+      <p-dropdown
+        id="roomType"
+        name="roomType"
+        [options]="roomTypeOptions"
+        [(ngModel)]="room.type"
+        optionLabel="label"
         optionValue="value"
         placeholder="Select room type"
         required
         #roomType="ngModel"
-        ></p-dropdown>
+      ></p-dropdown>
 
       <small *ngIf="roomType.invalid && roomType.touched" class="error">
         Room type is required.
       </small>
     </div>
 
-
     <div class="form-field">
       <label for="price">Price</label>
-      <input id="price" name="price" type="number" [(ngModel)]="room.price" required min="1" />
+      <input
+        id="price"
+        name="price"
+        type="number"
+        [(ngModel)]="room.price"
+        required
+        min="1"
+        #roomPrice="ngModel"
+      />
+      <small *ngIf="roomPrice.invalid && roomPrice.touched" class="error">
+        Price of room can't be zero
+      </small>
     </div>
 
     <div class="form-field">
       <label for="description">Description</label>
-      <textarea id="description" name="description" rows="3" [(ngModel)]="room.description" required></textarea>
+      <textarea
+        id="description"
+        name="description"
+        rows="3"
+        maxlength="50"
+        placeholder="Description(Max Characters 50)"
+        [(ngModel)]="room.description"
+        required
+      ></textarea>
     </div>
 
     <div class="dialog-footer">
-      <button type="button" class="cancel-btn" (click)="closeDialog()">Cancel</button>
-      <button type="submit" class="submit-btn" [disabled]="!roomForm.valid" (click)="addRoom()">
+      <button type="button" class="cancel-btn" (click)="closeDialog()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="submit-btn"
+        [disabled]="!roomForm.valid"
+        (click)="addRoom()"
+      >
         Add Room
       </button>
     </div>

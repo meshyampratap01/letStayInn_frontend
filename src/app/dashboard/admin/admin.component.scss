@@ -1,6 +1,6 @@
 .dashboard {
   padding: 2rem;
-  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  font-family: var(--font-family);
 
   .title {
     font-size: 2rem;
@@ -10,7 +10,7 @@
 
   .subtitle {
     font-size: 1rem;
-    color: #6c757d;
+    color: var(--subtitle-color);
     margin-bottom: 2rem;
   }
 
@@ -23,7 +23,7 @@
   .dashboard-card {
     height: 400px;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--box-shadow);
     background-color: #ffffff;
     display: flex;
     flex-direction: column;

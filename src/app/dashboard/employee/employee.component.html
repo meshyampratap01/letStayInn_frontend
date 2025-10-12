@@ -1,0 +1,100 @@
+<p-toast />
+<p-confirmDialog />
+
+@if(isLoading){
+<div class="loading-overlay">
+  <p-progress-spinner
+    strokeWidth="3"
+    fill="transparent"
+    animationDuration=".5s"
+    [style]="{ width: '50px', height: '50px' }"
+  />
+</div>
+}
+<div class="container">
+  <app-header [userName]="userName" [userRole]="userRole"></app-header>
+
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <div class="title-section">
+        <h2>Employee Dashboard</h2>
+        <p class="welcome-text">Welcome, {{ userName }}</p>
+      </div>
+    </div>
+
+    <div class="task-cards">
+      <div class="task-card pending">
+        <i class="pi pi-calendar card-icon"></i>
+        <div class="card-content">
+          <span class="card-title">Assigned Tasks</span>
+          <span class="card-value">{{ assignedTask }}</span>
+        </div>
+      </div>
+
+      <div class="task-card completed">
+        <i class="pi pi-check-circle card-icon"></i>
+        <div class="card-content">
+          <span class="card-title">Completed</span>
+          <span class="card-value">{{ completedTasks }}</span>
+        </div>
+      </div>
+
+      <div class="task-card available">
+        <i class="pi pi-clock card-icon"></i>
+        <div class="card-content">
+          <span class="card-title">Available Tasks</span>
+          <span class="card-value">{{ availableTasks }}</span>
+        </div>
+      </div>
+    </div>
+
+    @if(assignedServiceRequest.length===0){
+    <span class="no-requests-message">No Assigned Service Requests...</span>
+    }@else {
+      <!-- <span class="no-requests-message">Assigned Service Reqeusts</span> -->
+    <p-table
+      [value]="assignedServiceRequest"
+      class="assigned-request-table"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Room No</th>
+          <th>Type</th>
+          <th>Details</th>
+          <th>Created At</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-request>
+        <tr>
+          <td>{{ request.room_num }}</td>
+          <td>{{ request.type }}</td>
+          <td>{{ request.details }}</td>
+          <td>{{ request.created_at | date : "medium" }}</td>
+          <td>
+            <span
+              [ngClass]="{
+                'status-pending': request.status === 'Pending',
+                'status-inprogress': request.status === 'In Progress',
+                'status-completed': request.status === 'Completed'
+              }"
+              >{{ request.status }}</span
+            >
+          </td>
+          <td>
+            <p-dropdown
+              [options]="statusOptions"
+              optionLabel="label"
+              placeholder="Change Status"
+              (onChange)="updateRequestStatus(request,$event)"
+              [style]="{ width: '150px' }"
+            ></p-dropdown>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    }
+  </div>
+</div>

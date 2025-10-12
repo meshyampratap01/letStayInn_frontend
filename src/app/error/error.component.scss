@@ -12,7 +12,7 @@ $card-shadow: 0 2px 12px rgba(23, 105, 255, 0.08);
   height: 100vh;
   background: $background;
   color: $text;
-  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-family: var(--font-family);
 }
 
 .error-content {

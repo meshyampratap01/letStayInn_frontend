@@ -1,53 +1,93 @@
-<p-toast/>
+<p-toast />
 
 @if(isLoading){
-    <div class="loading-overlay">
-        <p-progress-spinner strokeWidth="3" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
-    </div>
+<div class="loading-overlay">
+  <p-progress-spinner
+    strokeWidth="3"
+    fill="transparent"
+    animationDuration=".5s"
+    [style]="{ width: '50px', height: '50px' }"
+  />
+</div>
 }
 
-<p-dialog header="Book Room" [(visible)]="bookingDialogVisible" [style]="{ width: '30rem' }" [modal]="true"
-  [closable]="false" class="custom-dialog-content">
+<p-dialog
+  header="Book Room"
+  [(visible)]="bookingDialogVisible"
+  [style]="{ width: '30rem' }"
+  [modal]="true"
+  [closable]="true"
+  class="custom-dialog-content"
+>
   <span class="dialog-subtitle">Fill in your booking details below.</span>
 
   <div class="dialog-form">
     <div class="form-group">
       <label for="roomSelect">Room</label>
-      <p-dropdown id="roomSelect" [options]="roomOptions" [(ngModel)]="selectedRoom" optionLabel="number"
-        placeholder="Select Room" class="custom-input" />
-
+      <p-dropdown
+        id="roomSelect"
+        [options]="roomOptions"
+        [(ngModel)]="selectedRoom"
+        optionLabel="number"
+        placeholder="Select Room"
+        class="custom-input"
+      />
     </div>
 
     <div class="form-group">
       <label>Room Type</label>
-      <p>{{ selectedRoom.type || '-' }}</p>
+      <p>{{ selectedRoom.type || "-" }}</p>
     </div>
 
     <div class="form-group">
       <label>Room Price</label>
-      <p>₹{{ selectedRoom.price || '-' }}</p>
+      <p>₹{{ selectedRoom.price || "-" }}</p>
     </div>
 
     <div class="form-group">
       <label for="checkIn">Check-In Date</label>
-      <input type="date" id="checkIn" [(ngModel)]="checkInDate" class="custom-input" />
+      <input
+        type="date"
+        id="checkIn"
+        [(ngModel)]="checkInDate"
+        (ngModelChange)="validateDates()"
+        class="custom-input"
+      />
     </div>
 
     <div class="form-group">
       <label for="checkOut">Check-Out Date</label>
-      <input type="date" id="checkOut" [(ngModel)]="checkOutDate" class="custom-input" />
+      <input
+        type="date"
+        id="checkOut"
+        [(ngModel)]="checkOutDate"
+        (ngModelChange)="validateDates()"
+        class="custom-input"
+      />
     </div>
   </div>
-
 
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-
   <div class="dialog-actions">
-    <button pButton type="button" label="Cancel" class="btn-secondary" (click)="bookingDialogVisible = false"></button>
-    <button pButton type="button" label="Confirm Booking" class="btn-primary" (click)="confirmBooking()"></button>
+    <button
+      pButton
+      type="button"
+      label="Cancel"
+      class="btn-secondary"
+      (click)="bookingDialogVisible = false"
+    ></button>
+
+    <button
+      pButton
+      type="button"
+      label="Confirm Booking"
+      class="btn-primary"
+      [disabled]="!!errorMessage"
+      (click)="confirmBooking()"
+    ></button>
   </div>
 </p-dialog>
 
@@ -55,15 +95,22 @@
   <div class="header">
     <h2>Book a Room</h2>
     <p class="subtitle">Choose from our available rooms and enjoy your stay</p>
-    <button pButton type="button" label="Book Room" icon="pi pi-calendar-plus" class="book-room-btn"
-      style="background-color: #4e47b5; border-color: white;" (click)="bookingDialogVisible = true"></button>
+    <button
+      pButton
+      type="button"
+      label="Book Room"
+      icon="pi pi-calendar-plus"
+      class="book-room-btn"
+      style="background-color: #4e47b5; border-color: white"
+      (click)="bookingDialogVisible = true"
+    ></button>
   </div>
 
   <div class="room-cards">
     <div class="room-card" *ngFor="let room of rooms">
       <div class="card-header">
         <span class="availability">Available</span>
-        <span class="price">₹{{ room.price }}<br>per night</span>
+        <span class="price">₹{{ room.price }}<br />per night</span>
       </div>
 
       <div class="card-body clickable" (click)="onRoomClick(room)">
@@ -73,13 +120,19 @@
 
         <ul class="amenities">
           <li *ngFor="let amenity of amenities">
-            <i class="material-icons">{{ getAmenityIcon(amenity) }}</i> {{ amenity }}
+            <i class="material-icons">{{ getAmenityIcon(amenity) }}</i>
+            {{ amenity }}
           </li>
         </ul>
       </div>
 
-      <button pButton type="button" label="Select This Room" class="select-btn"
-        style="background-color: #4e47b5; border-color: white;" (click)="onRoomClick(room)"></button>
+      <button
+        pButton
+        type="button"
+        label="Select This Room"
+        class="select-btn"
+        (click)="onRoomClick(room)"
+      ></button>
     </div>
   </div>
 </div>

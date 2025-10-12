@@ -13,8 +13,9 @@
     <p class="subtitle">Review guest feedback and ratings to improve service quality</p>
   </div>
   <div class="rating-summary">
-    <p-rating [disabled]="true" [(ngModel)]="averageRating" [stars]="5" cancel="false"></p-rating>
-    <span class="rating-text">{{ averageRating().toFixed(0) }}.0 Average ({{ totalFeedback() }} Reviews)</span>
+    <!-- <p-rating [disabled]="true" [(ngModel)]="averageRating" [stars]="5" cancel="false"></p-rating> -->
+     <span>Rating-</span>
+    <span class="rating-text">{{ averageRating().toFixed(1) }} Average ({{ totalFeedback() }} Reviews)</span>
   </div>
 
   <div class="feedback-list">

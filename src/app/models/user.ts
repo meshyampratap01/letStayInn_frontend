@@ -11,3 +11,11 @@ export type User = {
   UserName: string;
   Role: Roles;
 };
+
+export type profileDTO = {
+  id: string,
+  name: string,
+  email: string,
+  role: string,
+  available: boolean,
+}

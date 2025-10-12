@@ -44,15 +44,15 @@
       }
 
       .card-header {
-        background-color: #e3f2fd;
-        color: #1565c0;
+        background-color: #5362cc;
+        color: #ecf5ff;
         padding: 1rem;
         display: flex;
         justify-content: space-between;
         font-weight: 500;
 
         .availability {
-          background-color: #bbdefb;
+          // background-color: #2e42b185;
           padding: 0.25rem 0.5rem;
           border-radius: 4px;
           font-size: 0.85rem;
@@ -114,6 +114,7 @@
 
       .select-btn {
         margin: 1rem;
+        background-color: #5362cc;
         align-self: center;
         display: block;
       }
@@ -130,7 +131,7 @@
 
 .book-room-btn,
 .select-btn {
-  background-color: #1565c0 !important;
+  background-color: #5362cc !important;
   color: white !important;
   border: none;
   border-radius: 20px;
@@ -242,3 +243,9 @@
   justify-content: center;
   // pointer-events: all;
 }
+
+::ng-deep .p-confirmdialog {
+  font-family:var(--font-family);
+  text-align: left;
+}
+

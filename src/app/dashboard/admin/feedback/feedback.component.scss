@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 
     h2 {
       margin: 0;
@@ -15,37 +15,26 @@
     }
 
     .subtitle {
-      color: #6c757d;
+      color: var(--subtitle-color);
       font-size: 0.95rem;
-    }
-
-    .add-review-btn {
-      background-color: #007ad9;
-      color: #fff;
-      font-weight: 500;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10%;
-      width: auto;
-      height: auto;
-
-      &:hover{
-        cursor: pointer;
-      }
     }
   }
 
   .rating-summary {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+
+    span{
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
 
     .rating-text {
       font-size: 1rem;
       font-weight: 500;
-      color: #333;
+      color: var(--text-color);
     }
   }
 
@@ -69,7 +58,7 @@
         gap: 0.5rem;
         font-weight: 600;
         font-size: 1.1rem;
-        color: #333;
+        color: var(--text-color);
         margin-top: 10px;
       }
 
@@ -117,4 +106,9 @@
   align-items: center;
   justify-content: center;
   // pointer-events: all;
+}
+
+::ng-deep .p-confirmdialog {
+  font-family:var(--font-family);
+  text-align: left;
 }

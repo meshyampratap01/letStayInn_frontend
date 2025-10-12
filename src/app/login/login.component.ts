@@ -61,8 +61,8 @@ export class LoginComponent implements OnInit {
 
     const roleRouteMap: { [key: number]: string } = {
       4: '/admin',
-      2: '/kitchen',
-      3: '/cleaning',
+      2: '/employee',
+      3: '/employee',
       1: '/guest',
       0: '/login',
     };

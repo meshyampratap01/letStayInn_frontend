@@ -52,6 +52,19 @@
       background-color: #f4f4f4;
       font-weight: 600;
       padding: 0.75rem;
+
+            ::ng-deep .p-sortable-column-icon{
+        display: none;
+      }
+
+      ::ng-deep p-sortIcon::after {
+        content: 'unfold_more';
+        font-family: 'Material Icons';
+        font-size: 18px;
+        color: #666;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
     }
 
     td {
@@ -131,16 +144,21 @@
     }
   }
 
-  .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.451);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.451);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep .p-confirmdialog {
+  font-family: var(--font-family);
+  text-align: left;
 }

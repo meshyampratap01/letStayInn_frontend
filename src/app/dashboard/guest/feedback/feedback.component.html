@@ -44,6 +44,10 @@
     <button pButton type="button" label="+ Submit New Feedback" icon="pi pi-comment" class="submit-btn" (click)="showDialog=true"></button>
   </div>
 
+  @if(feedbackList.length===0){
+    <span class="no-feedback">No Feedbacks Submitted...</span>
+  }
+
   <div class="feedback-list">
     <p-card *ngFor="let fb of feedbackList" class="feedback-card">
       <div class="card-header">

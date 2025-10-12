@@ -18,13 +18,13 @@
     <div class="form-group">
       <label for="type">Request Type</label>
       <p-dropdown [options]="requestTypeOptions" [(ngModel)]="selectedType" optionLabel="label"
-        placeholder="Select Type" class="custom-input"></p-dropdown>
+        placeholder="Select Type" class="custom-input" (onChange)="onSelectService($event)"></p-dropdown>
     </div>
 
     <div class="form-group">
       <label for="details">Details</label>
       <textarea id="details" [(ngModel)]="requestDetails" rows="4" class="custom-input"
-        placeholder="Describe your request..."></textarea>
+        placeholder="Describe your request(Max Characters 120)" maxlength="120"></textarea>
     </div>
   </div>
 
@@ -36,20 +36,17 @@
 
 <div class="customer-service">
 
-  <!-- Header -->
   <div class="header">
     <h2>Service Requests</h2>
     <p class="subtitle">Request premium services for your comfort</p>
 
 
     <div class="action-buttons">
-      <button class="btn btn-cleaning" (click)="requestCleaning()">Request Cleaning</button>
-      <button class="btn btn-food" (click)="orderFood()">Order Food</button>
+      <button class="btn" (click)="requestService()">Make Service Request</button>
     </div>
 
   </div>
 
-  <!-- Service Request Cards -->
   <div class="service-cards">
 
     <div *ngIf="serviceRequests.length === 0" class="no-requests">

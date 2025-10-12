@@ -3,7 +3,7 @@ body {
 }
 
 .guest-dashboard-container {
-  font-family: "Segoe UI", sans-serif;
+  font-family: var(--font-family);
 
   .welcome-section {
     background: linear-gradient(to right, #5063cc, #8051d1);

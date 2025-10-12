@@ -1,6 +1,7 @@
 import { Component, input, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Button } from "primeng/button";
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,7 @@ import { Button } from "primeng/button";
   imports: [Button]
 })
 export class HeaderComponent {
-  // @Input() userName: string = '';
   userName = input.required<string>()
-  // @Input() userRole: string = '';
   userRole = input.required<string>()
 
   constructor(private router: Router) {}
@@ -23,6 +22,6 @@ export class HeaderComponent {
   }
 
   goToProfile(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['profile']);
   }
 }
