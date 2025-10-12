@@ -85,7 +85,7 @@
       type="button"
       label="Confirm Booking"
       class="btn-primary"
-      [disabled]="!!errorMessage"
+      [disabled]="!isFormValid"
       (click)="confirmBooking()"
     ></button>
   </div>

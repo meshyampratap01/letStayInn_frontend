@@ -27,7 +27,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: center;
+    justify-content: left;
+    margin-left: 6rem;
 
     .room-card {
       width: 300px;
@@ -189,13 +190,15 @@
     margin-top: 1.5rem;
 
     .btn-secondary {
-      background-color: #e0e0e0 !important;
+      background-color: transparent;
       color: #333 !important;
+      border: none;
       border-radius: 20px;
     }
 
     .btn-primary {
       background-color: #3f51b5 !important;
+      border: none;
       color: white !important;
       border-radius: 20px;
     }

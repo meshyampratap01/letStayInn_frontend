@@ -1,10 +1,10 @@
 .customer-service {
-  padding: 1.5rem;
+  padding: 2rem;
 
   .header {
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     // margin-left: 2rem;
 
     h2 {
@@ -29,7 +29,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        background-color: #4caf50;
+        background-color: #3f51b5;
         color: white;
 
         &:hover {
@@ -42,10 +42,12 @@
   .service-cards {
     margin-top: 2rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 1.5rem;
-    max-height: 70vh;
-    min-height: 200px;
+    margin-left: 6rem;
+    // max-height: 70vh;
+    // min-height: 200px;
     // overflow-y: auto;
 
     .service-card {
@@ -101,6 +103,7 @@
       .custom-input {
         padding: 0.5rem;
         border: 1px solid #ccc;
+        font-family: var(--font-family);
         border-radius: 6px;
         font-size: 0.95rem;
       }
@@ -126,7 +129,7 @@
     }
 
     .btn-secondary {
-      background-color: #f1f1f1;
+      background-color: transparent;
       color: var(--text-color);
       border: none;
       padding: 0.5rem 1rem;

@@ -175,9 +175,11 @@ form {
 }
 
 .disabled-btn {
-  background: #1768ff61;
+  background: #ccc;
+  font-family: var(--font-family);
   &:hover{
-  background: #1768ff61;
+  background: #ccc;
+  cursor: not-allowed;
   }
 }
 

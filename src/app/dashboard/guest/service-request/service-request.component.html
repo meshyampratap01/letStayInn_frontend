@@ -30,7 +30,7 @@
 
   <div class="dialog-actions">
     <button pButton label="Cancel" class="btn-secondary" (click)="requestDialogVisible = false"></button>
-    <button pButton label="Submit Request" class="btn-primary" (click)="submitRequest()"></button>
+    <button pButton label="Submit Request" class="btn-primary" (click)="submitRequest()" [disabled]="!isFormValid"></button>
   </div>
 </p-dialog>
 

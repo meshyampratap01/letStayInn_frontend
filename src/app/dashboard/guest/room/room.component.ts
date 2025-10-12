@@ -77,7 +77,19 @@ export class RoomComponent {
     this.selectedRoom = room;
     this.bookingDialogVisible = true;
     this.errorMessage = '';
+    this.validateDates();
   }
+
+  get isFormValid(): boolean {
+  return (
+    this.selectedRoom &&
+    this.selectedRoom.number !== 0 &&
+    this.checkInDate !== null &&
+    this.checkOutDate !== null &&
+    this.checkOutDate > this.checkInDate &&
+    !this.errorMessage
+  );
+}
 
   confirmBooking() {
     this.errorMessage = '';

@@ -1,49 +1,95 @@
 <p-toast></p-toast>
 <div class="login-container">
-	<div class="login-left">
-		<a class="login-back" routerLink="/">
-			<span class="login-back-arrow">&#8592;</span> Back
-		</a>
-		<img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-			alt="Hotel" class="login-hotel-img" />
-	</div>
-	<div [class]="'login-right'">
-		<h2 class="login-title">Login</h2>
-		<form (ngSubmit)="login(form)" #form>
-			<div class="login-field" [ngClass]="{'invalid': emailRef.invalid && emailRef.touched}">
-				<span class="login-field-icon"><i class="material-icons">mail_outline</i></span>
-				<input type="email" class="login-input" required email placeholder="Email Address" [(ngModel)]="email"
-					name="email" #emailRef="ngModel" (click)="inputClicked()" />
-			</div>
-			<div>
-				<div class="error-message" *ngIf="emailRef.touched && emailRef.invalid">
-					<small *ngIf="emailRef.errors?.['required']">Email is required</small>
-					<small *ngIf="emailRef.errors?.['email']">Enter a valid email</small>
-				</div>
-			</div>
+  <div class="login-left">
+    <a class="login-back" routerLink="/">
+      <span class="login-back-arrow">&#8592;</span> Back
+    </a>
+    <img
+      src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt="Hotel"
+      class="login-hotel-img"
+    />
+  </div>
+  <div [class]="'login-right'">
+    <h2 class="login-title">Login</h2>
+    <form (ngSubmit)="login(form)" #form="ngForm">
+      <div
+        class="login-field"
+        [ngClass]="{ invalid: emailRef.invalid && emailRef.touched }"
+      >
+        <span class="login-field-icon"
+          ><i class="material-icons">mail_outline</i></span
+        >
+        <input
+          type="email"
+          class="login-input"
+          required
+          email
+          placeholder="Email Address"
+          [(ngModel)]="email"
+          name="email"
+          #emailRef="ngModel"
+          (click)="inputClicked()"
+        />
+      </div>
+      <div>
+        <div class="error-message" *ngIf="emailRef.touched && emailRef.invalid">
+          <small *ngIf="emailRef.errors?.['required']">Email is required</small>
+          <small *ngIf="emailRef.errors?.['email']">Enter a valid email</small>
+        </div>
+      </div>
 
-			<div class="login-field" [ngClass]="{'invalid': passwordRef.invalid && passwordRef.touched}">
-				<span class="login-field-icon"><i class="material-icons">lock_outline</i></span>
-				<input type="password" class="login-input" required minlength="8" placeholder="Password"
-					[(ngModel)]="password" name="password" #passwordRef="ngModel" (click)="inputClicked()" />
-			</div>
-			<div>
-			<div class="error-message" *ngIf="passwordRef.touched && passwordRef.invalid">
-				<small *ngIf="passwordRef.errors?.['required']">Password is required</small>
-				<small *ngIf="passwordRef.errors?.['minlength']">Minimum 8 characters</small>
-			</div>
-			</div>
-			<button type="submit" [disabled]="loginClicked()" class="login-btn">
-				@if(loginClicked()){
-				<i class="pi pi-spin pi-spinner" style="font-size: 0.8rem; margin-left: 5px;"></i>
-				<!-- <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" /> -->
-				} @else {
-				<span>LOGIN</span>
-				}
-			</button>
-		</form>
-		<div class="login-link">
-			<a>Don't have an account? <span routerLink="/signup">Sign up</span></a>
-		</div>
-	</div>
+      <div
+        class="login-field"
+        [ngClass]="{ invalid: passwordRef.invalid && passwordRef.touched }"
+      >
+        <span class="login-field-icon"
+          ><i class="material-icons">lock_outline</i></span
+        >
+        <input
+          type="password"
+          class="login-input"
+          required
+          minlength="8"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          #passwordRef="ngModel"
+          (click)="inputClicked()"
+        />
+      </div>
+      <div>
+        <div
+          class="error-message"
+          *ngIf="passwordRef.touched && passwordRef.invalid"
+        >
+          <small *ngIf="passwordRef.errors?.['required']"
+            >Password is required</small
+          >
+          <small *ngIf="passwordRef.errors?.['minlength']"
+            >Minimum 8 characters</small
+          >
+        </div>
+      </div>
+      <button
+        type="submit"
+        [disabled]="form.invalid || loginClicked()"
+        [ngClass]="{ disabled: form.invalid || loginClicked() }"
+        class="login-btn"
+      >
+        @if(loginClicked()){
+        <i
+          class="pi pi-spin pi-spinner"
+          style="font-size: 0.8rem; margin-left: 5px"
+        ></i>
+        <!-- <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" /> -->
+        } @else {
+        <span>LOGIN</span>
+        }
+      </button>
+    </form>
+    <div class="login-link">
+      <a>Don't have an account? <span routerLink="/signup">Sign up</span></a>
+    </div>
+  </div>
 </div>

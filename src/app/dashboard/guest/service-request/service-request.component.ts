@@ -147,4 +147,13 @@ export class ServiceRequestComponent {
   onSelectService(event: DropdownChangeEvent){
     this.selectedType= event.value.value;
   }
+
+  get isFormValid(): boolean {
+  return (
+    this.selectedRoom !== null &&
+    this.selectedType.trim() !== '' &&
+    this.requestDetails.trim().length > 0 &&
+    this.requestDetails.trim().length <= 120
+  );
+}
 }

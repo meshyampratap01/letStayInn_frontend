@@ -3,7 +3,7 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 // import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(form: HTMLFormElement) {
+  login(form: NgForm) {
     this.loginClicked.set(true);
 
     const roleRouteMap: { [key: number]: string } = {
