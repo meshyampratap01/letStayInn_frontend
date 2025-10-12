@@ -51,7 +51,7 @@
     @if(assignedServiceRequest.length===0){
     <span class="no-requests-message">No Assigned Service Requests...</span>
     }@else {
-      <!-- <span class="no-requests-message">Assigned Service Reqeusts</span> -->
+    <!-- <span class="no-requests-message">Assigned Service Reqeusts</span> -->
     <p-table
       [value]="assignedServiceRequest"
       class="assigned-request-table"
@@ -59,14 +59,19 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th>Room No</th>
+          <th pSortableColumn="room_num">
+            Room No <p-sortIcon field="room_num"></p-sortIcon>
+          </th>
           <th>Type</th>
           <th>Details</th>
-          <th>Created At</th>
+          <th pSortableColumn="created_at">
+            Created At <p-sortIcon field="created_at"></p-sortIcon>
+          </th>
           <th>Status</th>
           <th>Action</th>
         </tr>
       </ng-template>
+
       <ng-template pTemplate="body" let-request>
         <tr>
           <td>{{ request.room_num }}</td>
@@ -85,10 +90,10 @@
           </td>
           <td>
             <p-dropdown
-              [options]="statusOptions"
+              [options]="getFilteredStatusOptions(request.status)"
               optionLabel="label"
-              placeholder="Change Status"
-              (onChange)="updateRequestStatus(request,$event)"
+              [placeholder]="request.status"
+              (onChange)="updateRequestStatus(request, $event)"
               [style]="{ width: '150px' }"
             ></p-dropdown>
           </td>

@@ -1,12 +1,12 @@
 @import "primeicons/primeicons.css";
 
-body{
+body {
   background-color: #f9f9f9;
 }
 
 .dashboard-container {
   padding: 2rem;
-  font-family:  var(--font-family);
+  font-family: var(--font-family);
   color: var(--text-color);
   display: flex;
   justify-content: center;
@@ -51,10 +51,10 @@ body{
       padding: 0.5rem 1rem;
       color: white;
       border-radius: 20px;
-    //   border-color: rgba(255, 0, 0, 0.68);  
+      //   border-color: rgba(255, 0, 0, 0.68);
       font-size: 0.875rem;
       font-weight: 500;
-    //   color: #5a5a5a;
+      //   color: #5a5a5a;
     }
   }
 }
@@ -62,9 +62,8 @@ body{
 .task-cards {
   display: flex;
   gap: 1.5rem;
-    justify-content: space-around;
-    margin-bottom: 5rem;
-
+  justify-content: space-around;
+  margin-bottom: 5rem;
 
   .task-card {
     flex: 1;
@@ -118,25 +117,6 @@ body{
 .assigned-request-table {
   margin-top: 0rem;
 
-  ::ng-deep .p-datatable {
-    border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-
-  ::ng-deep .p-datatable-thead > tr > th {
-    background-color: #f4f6f8;
-    color: #333;
-    font-weight: 600;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
-  }
-
-  ::ng-deep .p-datatable-tbody > tr > td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #eee;
-    color: #555;
-  }
-
   .status-pending {
     color: #f39c12;
     font-weight: 500;
@@ -155,10 +135,7 @@ body{
   ::ng-deep .p-dropdown {
     font-size: 0.9rem;
   }
-
-  
 }
-
 
 .no-requests-message {
   text-align: center;
@@ -185,4 +162,17 @@ body{
 ::ng-deep .p-confirmdialog {
   font-family: var(--font-family);
   text-align: left;
+}
+
+::ng-deep .p-sortable-column-icon {
+  display: none;
+}
+
+::ng-deep p-sortIcon::after {
+  content: "unfold_more";
+  font-family: "Material Icons";
+  font-size: 18px;
+  color: #666;
+  margin-left: 6px;
+  vertical-align: middle;
 }

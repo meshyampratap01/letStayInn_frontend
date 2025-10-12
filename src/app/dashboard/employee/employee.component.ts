@@ -53,8 +53,8 @@ export class EmployeeComponent implements OnDestroy {
   availableTasks: number = 0;
   assignedServiceRequest: svcRequest[] = [];
 
-  getAssignedReqeustSubscription?:Subscription;
-  updateRequestStatusSubscription?:Subscription;
+  getAssignedReqeustSubscription?: Subscription;
+  updateRequestStatusSubscription?: Subscription;
 
   constructor() {
     this.availability.set(true);
@@ -63,20 +63,20 @@ export class EmployeeComponent implements OnDestroy {
       next: (res) => {
         console.log(res);
         this.assignedServiceRequest = res as svcRequest[];
-        this.assignedServiceRequest.sort((a,b)=>{
+        this.assignedServiceRequest.sort((a, b) => {
           return b.status.localeCompare(a.status);
-        })
+        });
         this.assignedTask = res?.length;
         const taskInProgress = res.filter((s) => {
-          return s.status === 'Pending' || s.status=="In Progress";
+          return s.status === 'Pending' || s.status == 'In Progress';
         });
-        console.log('inprogress',taskInProgress)
+        console.log('inprogress', taskInProgress);
 
         this.availableTasks = taskInProgress.length;
         const completedTasks = res.filter((s) => {
           return s.status == 'Done';
         });
-        console.log('completed',completedTasks)
+        console.log('completed', completedTasks);
         this.completedTasks = completedTasks.length;
       },
     });
@@ -88,27 +88,38 @@ export class EmployeeComponent implements OnDestroy {
     { label: 'Done', value: 'Done' },
   ];
 
+  getFilteredStatusOptions(currentStatus: string) {
+    return this.statusOptions.filter(
+      (option) => option.value !== currentStatus
+    );
+  }
+
   updateRequestStatus(request: svcRequest, newStatus: DropdownChangeEvent) {
-    this.isLoading=true;
-    this.updateRequestStatusSubscription=this.employeeService.updateRequestStatus(request,newStatus.value).subscribe({
-      next: (res)=>{
-        this.isLoading=false;
-        this.getAssignedReqeustSubscription=this.employeeService.getAssignedServiceRequest().subscribe();
-        this.messageService.add({
-          severity: 'success',
-          closable: true,
-          summary: 'Updated Status successfully!',
-          life: 4000,
-        });
-      },
-      error: (err)=>{
-        this.isLoading=false;this.messageService.add({
-          severity: 'error',
-          summary: 'Unable to update the status!',
-          life: 3000,
-        })
-      }
-    })
+    this.isLoading = true;
+    this.updateRequestStatusSubscription = this.employeeService
+      .updateRequestStatus(request, newStatus.value)
+      .subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          this.getAssignedReqeustSubscription = this.employeeService
+            .getAssignedServiceRequest()
+            .subscribe();
+          this.messageService.add({
+            severity: 'success',
+            closable: true,
+            summary: 'Updated Status successfully!',
+            life: 4000,
+          });
+        },
+        error: (err) => {
+          this.isLoading = false;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Unable to update the status!',
+            life: 3000,
+          });
+        },
+      });
   }
 
   ngOnDestroy(): void {
