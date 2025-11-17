@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    const url = 'login';
+    const url = 'auth/login';
     return this.httpClient
       .post<loginResponse>(url, { email, password })
       .pipe(
@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   signup(name:string, email: string, password:string){
-    const url= `signup`;
+    const url= `auth/signup`;
     return this.httpClient.post<response>(url,{
       name: name,
       email:email,
