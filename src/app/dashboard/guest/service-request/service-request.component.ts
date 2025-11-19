@@ -153,6 +153,7 @@ export class ServiceRequestComponent {
     this.selectedRoom !== null &&
     this.selectedType.trim() !== '' &&
     this.requestDetails.trim().length > 0 &&
+    this.requestDetails.trim().length >= 5 &&
     this.requestDetails.trim().length <= 120
   );
 }

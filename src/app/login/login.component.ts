@@ -90,7 +90,6 @@ export class LoginComponent implements OnInit {
         },
         complete: () => {
           this.loginClicked.set(false);
-          console.log('Login complete');
         },
       });
     this.destroyRef.onDestroy(() => {

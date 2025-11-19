@@ -1,17 +1,19 @@
 import { Component, effect, inject } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { DialogModule } from 'primeng/dialog';
+import { CardModule } from 'primeng/card';
+import { RatingModule } from 'primeng/rating';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 import { feedback } from '../../../models/feedback';
 import { FeedbackService } from '../../../service/feedback.service';
 import { AuthService } from '../../../service/auth.service';
-import { CardModule } from 'primeng/card';
-import { RatingModule } from 'primeng/rating';
-import { CommonModule, DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { Toast, ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { response } from '../../../models/response';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-feedback',
@@ -95,7 +97,7 @@ export class FeedbackComponent {
         this.messageService.add({
           severity:'error',
           summary: 'Feedback Not Submitted!',
-          detail: err.message,
+          detail: "No active or confirmed booking found for feedback",
         })
       }
     })

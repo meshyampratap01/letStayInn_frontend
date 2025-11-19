@@ -15,14 +15,14 @@ export const adminGuard: CanActivateFn = (route, state) => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     router.navigate(['/login']);
-    return router.createUrlTree(['/unauthorized']);
+    return router.createUrlTree(['/login']);
   }
 
 
   if (authService.isAdmin()){
     return true;
   }else{
-    return router.createUrlTree(['/unauthorized']);
+    return router.createUrlTree(['/login']);
   }
 };
 
