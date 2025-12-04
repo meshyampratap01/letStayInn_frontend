@@ -65,7 +65,6 @@ export class ServiceRequestComponent {
     this.confirmationService.confirm({
       message: `Are you sure you want to assign this request?`,
       header: 'Confirm Assignment',
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.isLoading = true;
         const payload = {
