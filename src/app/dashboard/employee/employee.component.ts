@@ -8,7 +8,7 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { HeaderComponent } from '../../shared/header/header.component';
 import { AuthService } from '../../service/auth.service';
@@ -82,22 +82,25 @@ export class EmployeeComponent implements OnDestroy {
     });
   }
 
-  statusOptions = [
+  statusOptions: { label: string; value: svcRequest['status'] }[] = [
     { label: 'Pending', value: 'Pending' },
     { label: 'In Progress', value: 'In Progress' },
     { label: 'Done', value: 'Done' },
   ];
 
-  getFilteredStatusOptions(currentStatus: string) {
+  getFilteredStatusOptions(currentStatus: svcRequest['status']) {
     return this.statusOptions.filter(
       (option) => option.value !== currentStatus
     );
   }
 
-  updateRequestStatus(request: svcRequest, newStatus: DropdownChangeEvent) {
+  updateRequestStatus(request: svcRequest, newStatus: svcRequest['status']) {
+    if (!newStatus || newStatus === request.status) {
+      return;
+    }
     this.isLoading = true;
     this.updateRequestStatusSubscription = this.employeeService
-      .updateRequestStatus(request, newStatus.value)
+      .updateRequestStatus(request, newStatus)
       .subscribe({
         next: (res) => {
           this.isLoading = false;

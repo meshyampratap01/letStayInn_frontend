@@ -85,10 +85,10 @@ export class EmployeeService {
     return this.httpClient.put<response>(url,{});
   }
 
-  updateRequestStatus(request: svcRequest,status: any){
+  updateRequestStatus(request: svcRequest, status: svcRequest['status']){
     const url = `employee/service-requests/${request.id}/status`
     return this.httpClient.put(url,{
-      status: status.value
+      status
     })
   }
 }

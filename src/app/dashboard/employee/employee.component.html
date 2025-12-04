@@ -64,9 +64,6 @@
           </th>
           <th>Type</th>
           <th>Details</th>
-          <th pSortableColumn="created_at">
-            Created At <p-sortIcon field="created_at"></p-sortIcon>
-          </th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -77,24 +74,28 @@
           <td>{{ request.room_num }}</td>
           <td>{{ request.type }}</td>
           <td>{{ request.details }}</td>
-          <td>{{ request.created_at | date : "medium" }}</td>
           <td>
             <span
               [ngClass]="{
                 'status-pending': request.status === 'Pending',
                 'status-inprogress': request.status === 'In Progress',
-                'status-completed': request.status === 'Completed'
+                'status-completed': request.status === 'Done'
               }"
               >{{ request.status }}</span
             >
           </td>
           <td>
             <p-dropdown
+              class="status-dropdown"
               [options]="getFilteredStatusOptions(request.status)"
               optionLabel="label"
-              [placeholder]="request.status"
-              (onChange)="updateRequestStatus(request, $event)"
-              [style]="{ width: '150px' }"
+              optionValue="value"
+              placeholder="Update status"
+              appendTo="body"
+              scrollHeight="200px"
+              [panelStyle]="{ 'max-height': '220px' }"
+              (onChange)="updateRequestStatus(request, $event.value)"
+              [disabled]="isLoading"
             ></p-dropdown>
           </td>
         </tr>

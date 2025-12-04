@@ -50,7 +50,6 @@ export class AuthService {
         : 1,
       };
     } catch (err){
-      console.error('Invalid JWT',err);
       return {ID: '', UserName: '', Role:0};
     }
   }

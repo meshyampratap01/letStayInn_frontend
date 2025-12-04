@@ -98,7 +98,6 @@ export class EmployeeComponent {
           this.messageService.add({
             severity: 'error',
             summary: 'Some error Occured!',
-            detail: res.message,
             life: 3000,
           });
         },
@@ -135,7 +134,7 @@ export class EmployeeComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Some error Occured!',
-          detail: res.message,
+          detail: "Error updating employee. Please try again.",
           life: 3000,
         });
         this.visible = false;
@@ -175,7 +174,6 @@ export class EmployeeComponent {
             this.messageService.add({
               severity: 'error',
               summary: 'Some error Occured!',
-              detail: res.message,
               life: 3000,
             });
           },

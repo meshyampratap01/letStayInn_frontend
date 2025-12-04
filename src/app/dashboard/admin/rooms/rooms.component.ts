@@ -102,7 +102,6 @@ export class RoomsComponent {
           this.messageService.add({
             severity: 'error',
             summary: 'Some error Occured!',
-            detail: res.message,
             life: 3000,
           });
         },
@@ -175,7 +174,6 @@ export class RoomsComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Some error Occured!',
-          detail: res.message,
           life: 3000,
         });
         this.visible = false;

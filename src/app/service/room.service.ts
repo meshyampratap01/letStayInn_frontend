@@ -36,7 +36,6 @@ export class RoomService {
         });
       }),
       catchError((err) => {
-        console.error('fetching room failed', err);
         throw err;
       })
     );

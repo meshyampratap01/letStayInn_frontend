@@ -101,7 +101,6 @@ export class FeedbackComponent {
             this.messageService.add({
               severity: 'error',
               summary: 'Some error Occured!',
-              detail: res.message,
               life: 3000,
             });
           },

@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate([roleRouteMap[userRole]]);
         },
         error: (err: any) => {
-          console.error('Login error', err);
           this.isInvalid.set(true);
           this.loginClicked.set(false);
           this.messageService.add({
