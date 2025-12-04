@@ -1,17 +1,19 @@
 import { FormsModule } from '@angular/forms';
-import { DialogModule } from 'primeng/dialog';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
-import { ButtonModule } from 'primeng/button';
 import { Component, inject } from '@angular/core';
-import { CommonModule, DatePipe, TitleCasePipe } from '@angular/common';
-import { ToastModule } from 'primeng/toast';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+
 import { AdminService } from '../../../service/admin.service';
 import { AuthService } from '../../../service/auth.service';
 import { BookingService } from '../../../service/booking.service';
 import { RoomService } from '../../../service/room.service';
 import { svcRequest } from '../../../models/service_request';
+
+import { ToastModule } from 'primeng/toast';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-service-request',
@@ -19,7 +21,6 @@ import { MessageService } from 'primeng/api';
   imports: [
     TitleCasePipe,
     ProgressSpinnerModule,
-    DatePipe,
     CommonModule,
     ToastModule,
     FormsModule,
@@ -145,7 +146,7 @@ export class ServiceRequestComponent {
   }
 
   onSelectService(event: DropdownChangeEvent){
-    this.selectedType= event.value.value;
+    this.selectedType = event.value;
   }
 
   get isFormValid(): boolean {

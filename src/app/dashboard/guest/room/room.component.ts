@@ -10,6 +10,7 @@ import { BookingService } from '../../../service/booking.service';
 import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-room',
@@ -22,6 +23,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     FormsModule,
     Toast,
     ProgressSpinnerModule,
+    CalendarModule,
   ],
   providers: [MessageService],
   templateUrl: './room.component.html',
@@ -36,6 +38,8 @@ export class RoomComponent {
 
   isLoading = false;
 
+  minDate: Date = new Date();
+
   selectedRoom: room = {
     number: 0,
     type: '',
@@ -47,8 +51,8 @@ export class RoomComponent {
   rooms: room[] = [];
   roomOptions: room[] = [];
 
-  checkInDate: string | null = null;
-  checkOutDate: string | null = null;
+  checkInDate: Date | null = null;
+  checkOutDate: Date | null = null;
 
   amenities = ['WiFi', 'TV', 'AC'];
 
@@ -77,6 +81,8 @@ export class RoomComponent {
     this.selectedRoom = room;
     this.bookingDialogVisible = true;
     this.errorMessage = '';
+    this.checkInDate = null;
+    this.checkOutDate = null;
     this.validateDates();
   }
 
@@ -104,9 +110,12 @@ export class RoomComponent {
       return;
     }
 
+    const checkInStr = this.formatDate(this.checkInDate);
+    const checkOutStr = this.formatDate(this.checkOutDate);
+
     this.isLoading = true;
     this.bookingService
-      .bookRoom(this.selectedRoom.number, this.checkInDate, this.checkOutDate)
+      .bookRoom(this.selectedRoom.number, checkInStr, checkOutStr)
       .subscribe({
         next: (res) => {
           this.isLoading = false;
@@ -138,6 +147,13 @@ export class RoomComponent {
           });
         },
       });
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   validateDates() {

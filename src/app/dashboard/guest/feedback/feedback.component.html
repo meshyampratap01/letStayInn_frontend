@@ -45,7 +45,11 @@
   </div>
 
   @if(feedbackList.length===0){
-    <span class="no-feedback">No Feedbacks Submitted...</span>
+    <div class="no-feedback-fallback">
+      <i class="material-icons">feedback</i>
+      <h3>No Feedback Submitted</h3>
+      <p>You haven't submitted any feedback yet. Share your experience to help us improve.</p>
+    </div>
   }
 
   <div class="feedback-list">

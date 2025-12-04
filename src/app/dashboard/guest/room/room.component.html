@@ -14,60 +14,70 @@
 <p-dialog
   header="Book Room"
   [(visible)]="bookingDialogVisible"
-  [style]="{ width: '30rem' }"
+  [style]="{ width: '35rem' }"
   [modal]="true"
   [closable]="true"
+  [draggable]="false"
   class="custom-dialog-content"
 >
   <span class="dialog-subtitle">Fill in your booking details below.</span>
 
   <div class="dialog-form">
     <div class="form-group">
-      <label for="roomSelect">Room</label>
+      <label for="roomSelect">Select Room</label>
       <p-dropdown
         id="roomSelect"
         [options]="roomOptions"
         [(ngModel)]="selectedRoom"
         optionLabel="number"
-        placeholder="Select Room"
-        class="custom-input"
+        placeholder="Choose a room"
+        class="w-full"
       />
     </div>
 
-    <div class="form-group">
-      <label>Room Type</label>
-      <p>{{ selectedRoom.type || "-" }}</p>
-    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Room Type</label>
+        <p class="form-value">{{ selectedRoom.type || "-" }}</p>
+      </div>
 
-    <div class="form-group">
-      <label>Room Price</label>
-      <p>₹{{ selectedRoom.price || "-" }}</p>
+      <div class="form-group">
+        <label>Price per Night</label>
+        <p class="form-value">₹{{ selectedRoom.price || "-" }}</p>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="checkIn">Check-In Date</label>
-      <input
-        type="date"
+      <p-calendar
         id="checkIn"
         [(ngModel)]="checkInDate"
+        [minDate]="minDate"
+        [showIcon]="true"
+        dateFormat="dd/mm/yy"
+        placeholder="Select check-in date"
         (ngModelChange)="validateDates()"
-        class="custom-input"
+        class="w-full"
       />
     </div>
 
     <div class="form-group">
       <label for="checkOut">Check-Out Date</label>
-      <input
-        type="date"
+      <p-calendar
         id="checkOut"
         [(ngModel)]="checkOutDate"
+        [minDate]="minDate"
+        [showIcon]="true"
+        dateFormat="dd/mm/yy"
+        placeholder="Select check-out date"
         (ngModelChange)="validateDates()"
-        class="custom-input"
+        class="w-full"
       />
     </div>
   </div>
 
   <div *ngIf="errorMessage" class="error-message">
+    <i class="pi pi-exclamation-circle"></i>
     {{ errorMessage }}
   </div>
 
@@ -107,32 +117,40 @@
   </div>
 
   <div class="room-cards">
-    <div class="room-card" *ngFor="let room of rooms">
-      <div class="card-header">
-        <span class="availability">Available</span>
-        <span class="price">₹{{ room.price }}<br />per night</span>
+    @if(rooms.length > 0) {
+      <div class="room-card" *ngFor="let room of rooms">
+        <div class="card-header">
+          <span class="availability">Available</span>
+          <span class="price">₹{{ room.price }}<br />per night</span>
+        </div>
+
+        <div class="card-body clickable" (click)="onRoomClick(room)">
+          <h3>Room {{ room.number }}</h3>
+          <p class="type">{{ room.type }}</p>
+          <p class="description">{{ room.description }}</p>
+
+          <ul class="amenities">
+            <li *ngFor="let amenity of amenities">
+              <i class="material-icons">{{ getAmenityIcon(amenity) }}</i>
+              {{ amenity }}
+            </li>
+          </ul>
+        </div>
+
+        <button
+          pButton
+          type="button"
+          label="Select This Room"
+          class="select-btn"
+          (click)="onRoomClick(room)"
+        ></button>
       </div>
-
-      <div class="card-body clickable" (click)="onRoomClick(room)">
-        <h3>Room {{ room.number }}</h3>
-        <p class="type">{{ room.type }}</p>
-        <p class="description">{{ room.description }}</p>
-
-        <ul class="amenities">
-          <li *ngFor="let amenity of amenities">
-            <i class="material-icons">{{ getAmenityIcon(amenity) }}</i>
-            {{ amenity }}
-          </li>
-        </ul>
+    } @else {
+      <div class="no-rooms-fallback">
+        <i class="material-icons">hotel</i>
+        <h3>No Available Rooms</h3>
+        <p>Sorry, there are no available rooms at the moment. Please check back later.</p>
       </div>
-
-      <button
-        pButton
-        type="button"
-        label="Select This Room"
-        class="select-btn"
-        (click)="onRoomClick(room)"
-      ></button>
-    </div>
+    }
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
@@ -20,7 +20,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TableModule,
     DropdownModule,
     FormsModule,
-    DatePipe,
     ConfirmDialogModule,
     ToastModule,
     ProgressSpinnerModule,

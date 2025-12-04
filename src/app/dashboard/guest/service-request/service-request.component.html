@@ -6,32 +6,57 @@
 
 <p-toast/>
 
-<p-dialog header="New Service Request" [(visible)]="requestDialogVisible" [modal]="true" [style]="{ width: '30rem' }"
-  [closable]="false" class="request-dialog">
+<p-dialog 
+  header="New Service Request" 
+  [(visible)]="requestDialogVisible" 
+  [modal]="true" 
+  [style]="{ width: '35rem' }"
+  [closable]="true" 
+  class="request-dialog">
   <div class="dialog-form">
     <div class="form-group">
       <label for="room">Room Number</label>
-      <p-dropdown [options]="roomOptions" [(ngModel)]="selectedRoom" optionLabel="label" placeholder="Select Room"
-        class="custom-input"></p-dropdown>
+      <p-dropdown 
+        id="room"
+        [options]="roomOptions" 
+        [(ngModel)]="selectedRoom" 
+        optionLabel="label" 
+        placeholder="Select your room"
+        class="w-full"></p-dropdown>
     </div>
 
     <div class="form-group">
       <label for="type">Request Type</label>
-      <p-dropdown [options]="requestTypeOptions" [(ngModel)]="selectedType" optionLabel="label"
-        placeholder="Select Type" class="custom-input" (onChange)="onSelectService($event)"></p-dropdown>
+      <p-dropdown 
+        id="type"
+        [options]="requestTypeOptions" 
+        [(ngModel)]="selectedType" 
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select service type" 
+        class="w-full" 
+        (onChange)="onSelectService($event)"></p-dropdown>
     </div>
 
     <div class="form-group">
       <label for="details">Details</label>
-      <textarea id="details" [(ngModel)]="requestDetails" rows="4" class="custom-input"
-        placeholder="Describe your request(Min Characters 5 / Max Characters 120)" maxlength="120"></textarea>
+      <textarea 
+        id="details" 
+        [(ngModel)]="requestDetails" 
+        rows="4" 
+        class="custom-textarea"
+        placeholder="Describe your request (minimum 5, maximum 120 characters)" 
+        maxlength="120"></textarea>
+      <small class="char-count">{{ requestDetails.length }}/120 characters</small>
     </div>
   </div>
 
-  <div class="dialog-actions">
-    <button pButton label="Cancel" class="btn-secondary" (click)="requestDialogVisible = false"></button>
-    <button pButton label="Submit Request" class="btn-primary" (click)="submitRequest()" [disabled]="!isFormValid"></button>
-  </div>
+  <ng-template pTemplate="footer">
+    <div class="dialog-actions">
+      <button pButton label="Cancel" icon="pi pi-times" class="p-button-text" (click)="requestDialogVisible = false"></button>
+      <button pButton label="Submit Request" icon="pi pi-check" class="p-button" (click)="submitRequest()" [disabled]="!selectedRoom || !selectedType || (requestDetails.trim().length < 5)"></button>
+    </div>
+  </ng-template>
 </p-dialog>
 
 <div class="customer-service">
@@ -48,21 +73,32 @@
   </div>
 
   <div class="service-cards">
-
-    <div *ngIf="serviceRequests.length === 0" class="no-requests">
-      No service requests found.
-    </div>
-
-    <div class="service-card" *ngFor="let request of serviceRequests">
-      <div class="card-header">
-        <span class="type">{{ request.type | titlecase }} Request</span>
-        <span class="status">{{ request.status }}</span>
+    @if(serviceRequests.length > 0) {
+      <div class="service-card" *ngFor="let request of serviceRequests">
+        <div class="card-header">
+          <span class="type">{{ request.type | titlecase }} Request</span>
+          <span
+            [ngClass]="{
+              'status-badge': true,
+              'status-pending': request.status === 'pending',
+              'status-completed': request.status === 'completed',
+              'status-in-progress': request.status === 'in-progress'
+            }"
+          >
+            {{ request.status | titlecase }}
+          </span>
+        </div>
+        <div class="card-body">
+          <p><strong>Room:</strong> {{ request.room_num }}</p>
+          <p><strong>Details:</strong> {{ request.details }}</p>
+        </div>
       </div>
-      <div class="card-body">
-        <p><strong>Room:</strong> {{ request.room_num }}</p>
-        <p><strong>Details:</strong> {{ request.details }}</p>
-        <p><strong>Requested At:</strong> {{ request.created_at| date: 'dd MMM yyyy, hh:mm a' }}</p>
+    } @else {
+      <div class="no-requests-fallback">
+        <i class="material-icons">room_service</i>
+        <h3>No Service Requests</h3>
+        <p>You haven't made any service requests yet. Use the button above to request a service.</p>
       </div>
-    </div>
+    }
   </div>
 </div>

@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
       .login(this.email, this.password)
       .subscribe({
         next: () => {
+          form.reset();
           const user = this.authService.user();
           const userRole = user?.Role ?? 0;
           this.router.navigate([roleRouteMap[userRole]]);
@@ -99,8 +100,6 @@ export class LoginComponent implements OnInit {
         loginSubscription.unsubscribe();
       }
     });
-
-    form.reset();
   }
 
   inputClicked() {

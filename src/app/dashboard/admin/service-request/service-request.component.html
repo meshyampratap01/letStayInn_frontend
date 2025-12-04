@@ -20,6 +20,7 @@
     </p>
   </div>
 
+  @if(requests().length > 0) {
   <p-table
     [value]="requests()"
     class="request-table"
@@ -31,20 +32,13 @@
         <th pSortableColumn="room_num">
           Room <p-sortIcon field="room_num"></p-sortIcon>
         </th>
-        <th>
-          Type 
-        </th>
-        <th>
-          Details
-        </th>
+        <th>Type</th>
+        <th>Details</th>
         <th pSortableColumn="status">
           Status <p-sortIcon field="status"></p-sortIcon>
         </th>
         <th pSortableColumn="is_assigned">
-          Assignment <p-sortIcon field="is_assigned"></p-sortIcon>
-        </th>
-        <th pSortableColumn="created_at">
-          Created <p-sortIcon field="created_at"></p-sortIcon>
+          Assignment 
         </th>
         <th>Actions</th>
       </tr>
@@ -54,10 +48,11 @@
       <tr>
         <td>{{ request.room_num }}</td>
         <td>{{ request.type }}</td>
-        <td>{{ request.details }}</td>
+        <td class="details-cell">{{ request.details }}</td>
         <td>
           <span
             [ngClass]="{
+              'status-badge': true,
               'status-assigned': request.status === 'Assigned',
               'status-pending': request.status === 'Pending',
               'status-inprogress': request.status === 'In Progress',
@@ -67,8 +62,11 @@
             {{ request.status }}
           </span>
         </td>
-        <td>{{ request.is_assigned ? "Assigned" : "Unassigned" }}</td>
-        <td>{{ request.created_at | date : "medium" }}</td>
+        <td class="assignment-cell">
+          <span class="assignment-badge">
+            {{ request.is_assigned ? "Assigned" : "Unassigned" }}
+          </span>
+        </td>
         <td class="actions">
           <p-dropdown
             [options]="staffOptions"
@@ -84,4 +82,11 @@
       </tr>
     </ng-template>
   </p-table>
+  } @else {
+    <div class="no-requests-fallback">
+      <i class="material-icons">assignment</i>
+      <h3>No Service Requests</h3>
+      <p>All service requests have been completed or there are no pending requests to manage.</p>
+    </div>
+  }
 </div>
