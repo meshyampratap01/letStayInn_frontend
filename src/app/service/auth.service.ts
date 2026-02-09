@@ -42,15 +42,15 @@ export class AuthService {
         UserName: payload.username,
         Role: 
         payload.role === 'Manager'
-        ? 4
+        ? Roles.MANAGER
         : payload.role === 'KitchenStaff'
-        ? 2
+        ? Roles.KITCHENSTAFF
         :payload.role === 'CleaningStaff'
-        ? 3
-        : 1,
+        ? Roles.CLEANINGSTAFF
+        : Roles.GUEST,
       };
     } catch (err){
-      return {ID: '', UserName: '', Role:0};
+      return {ID: '', UserName: '', Role:Roles.Invalid};
     }
   }
 
@@ -65,7 +65,7 @@ export class AuthService {
   isAdmin():boolean{
     const token = localStorage.getItem('token') as string;
     const currUser = this.decodeJWT(token);
-    if (currUser.Role===4){
+    if (currUser.Role===Roles.MANAGER){
       return true;
     }
     return false;

@@ -48,7 +48,7 @@ export class MyBookingsComponent {
         this.bookingService.deleteBooking(bookingId).subscribe({
           next: (res) => {
             this.isLoading = false;
-            if (res.code === 200) {
+            if (res.status_code === 200) {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Deleted',

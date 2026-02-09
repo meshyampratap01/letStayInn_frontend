@@ -43,9 +43,6 @@ export class ServiceRequestComponent {
     this.adminService.loadServiceRequest().subscribe({
       next: (res) => {
         let serviceRequests: svcRequest[] = res.data;
-        serviceRequests.sort((a,b)=>{
-          return a.room_num-b.room_num;
-        })
         this.requests.set(serviceRequests);
       },
     });
@@ -62,6 +59,7 @@ export class ServiceRequestComponent {
   }
 
   assignRequest(req: svcRequest) {
+    console.log(req)
     this.confirmationService.confirm({
       message: `Are you sure you want to assign this request?`,
       header: 'Confirm Assignment',

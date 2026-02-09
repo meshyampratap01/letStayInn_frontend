@@ -42,7 +42,7 @@ export class EmployeeComponent implements OnDestroy {
   role: Roles = this.authService.user()?.Role as Roles;
 
   userName: string = this.authService.user()?.UserName as string;
-  userRole: string = Roles[this.role];
+  userRole = this.role;
   userID: string = this.authService.user()?.ID as string;
 
   isLoading: boolean = false;
@@ -84,7 +84,7 @@ export class EmployeeComponent implements OnDestroy {
 
   statusOptions: { label: string; value: svcRequest['status'] }[] = [
     { label: 'Pending', value: 'Pending' },
-    { label: 'In Progress', value: 'In Progress' },
+    // { label: 'In Progress', value: 'In Progress' },
     { label: 'Done', value: 'Done' },
   ];
 
@@ -95,9 +95,9 @@ export class EmployeeComponent implements OnDestroy {
   }
 
   updateRequestStatus(request: svcRequest, newStatus: svcRequest['status']) {
-    if (!newStatus || newStatus === request.status) {
-      return;
-    }
+    // if (!newStatus || newStatus === request.status) {
+    //   return;
+    // }
     this.isLoading = true;
     this.updateRequestStatusSubscription = this.employeeService
       .updateRequestStatus(request, newStatus)
@@ -118,7 +118,7 @@ export class EmployeeComponent implements OnDestroy {
           this.isLoading = false;
           this.messageService.add({
             severity: 'error',
-            summary: 'Unable to update the status!',
+            summary: err.message,
             life: 3000,
           });
         },

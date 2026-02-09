@@ -30,7 +30,7 @@ export class GuestComponent implements OnDestroy{
   userName: string = this.authService.user()?.UserName as string;
   role: Roles = this.authService.user()?.Role as Roles;
   id: string | undefined = this.authService.user()?.ID;
-  userRole: string = Roles[this.role];
+  userRole: Roles = this.role;
 
   totalActiveBookings: number | null = null;
   activeRequests: svcRequest[] = [];
@@ -54,20 +54,14 @@ export class GuestComponent implements OnDestroy{
 
     this.getAverageRatingSubscription=this.feedbackService.getAverageRating().subscribe();
     effect(() => {
-      let count = 0;
-      this.feedbackService.feedbacks().forEach((fb) => {
-        if (fb.user_id === this.id) {
-          count++;
-        }
-      });
-      this.reviewsGiven = count;
+      this.reviewsGiven = this.feedbackService.feedbacks().length;
     });
 
     this.loadserviceReqeustSubscription=this.adminService.loadServiceRequest().subscribe();
    this.serviceReqeustSubscription= this.adminService.serviceRequests.subscribe({
       next: (res) => {
         this.activeRequests = res.filter(
-          (val) => this.id === val.user_id && val.status === 'Pending'
+          (val) => val.status === 'Pending'
         );
       },
     });

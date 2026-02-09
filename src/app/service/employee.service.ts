@@ -67,12 +67,13 @@ export class EmployeeService {
   }
 
   assignServiceRequest(payload: {requestId: string, employeeId: string}){
-    const url = `service-requests/${payload.requestId}/assign`;
+    const url = `service-requests/assign/${payload.requestId}`;
+    console.log(url)
     return this.httpClient.post(url,{employee_id:payload.employeeId});
   }
 
   getAssignedServiceRequest(){
-    const url = 'employee/service-requests';
+    const url = 'employees/service-requests';
     return this.httpClient.get<response>(url).pipe(
       tap((res)=>{
         this._assignedServiceReqeust.next(res.data);
@@ -86,7 +87,7 @@ export class EmployeeService {
   }
 
   updateRequestStatus(request: svcRequest, status: svcRequest['status']){
-    const url = `employee/service-requests/${request.id}/status`
+    const url = `employees/service-requests/status/${request.service_request_id}`
     return this.httpClient.put(url,{
       status
     })

@@ -1,6 +1,6 @@
 export interface BookingDTO {
   id: string;
-  room_number: number;
+  room_num: number;
   status: string;
   food_req: boolean,
   clean_req: boolean,

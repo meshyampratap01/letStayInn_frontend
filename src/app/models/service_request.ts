@@ -1,5 +1,6 @@
 export type svcRequest = {
-    id: string;
+    service_request_id: string;
+    id: string
     user_id: string;
     room_num: number;
     type: string;

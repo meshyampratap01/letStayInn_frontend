@@ -30,7 +30,7 @@ export class BookingService {
       const day = String(d.getDate()).padStart(2, '0');
       const month = String(d.getMonth() + 1).padStart(2, '0');
       const year = d.getFullYear();
-      return `${day}-${month}-${year}`;
+      return `${year}-${month}-${day}`;
     };
 
     const payload = {
@@ -39,9 +39,9 @@ export class BookingService {
       check_out_date: formatToDDMMYYYY(checkOutDate),
     };
 
-    console.log('Booking payload:', payload);
+    console.log('Booking payload:', JSON.stringify(payload));
 
-    return this.httpClient.post<response>('bookings', payload, {
+    return this.httpClient.post<response>('bookings/bookRoom', payload, {
       headers: {
         'Content-Type': 'application/json',
       },

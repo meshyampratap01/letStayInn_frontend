@@ -60,7 +60,6 @@ export class FeedbackComponent {
     effect(() => {
       this.feedbackList = this.feebackService
         .feedbacks()
-        .filter((fb) => fb.user_id === this.userID);
     });
   }
 
@@ -74,7 +73,7 @@ export class FeedbackComponent {
     this.feebackService.submitFeedback(this.newFeedback).subscribe({
       next:(res)=>{
         this.isLoading=false;
-        if(res.code === 201){
+        if(res.status_code === 201){
           this.feebackService.getAverageRating().subscribe();
           this.messageService.add({
             severity: 'success',

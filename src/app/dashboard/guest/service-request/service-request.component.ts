@@ -57,9 +57,10 @@ export class ServiceRequestComponent {
 
     this.adminService.serviceRequests.subscribe({
       next: (res) => {
-        this.serviceRequests = res.filter(
-          (val) => this.user?.ID === val.user_id
-        );
+        // this.serviceRequests = res.filter(
+        //   (val) => this.user?.ID === val.user_id
+        // );
+        this.serviceRequests = res;
       },
     });
 
@@ -68,8 +69,8 @@ export class ServiceRequestComponent {
     this.bookingService.activeBookings.subscribe({
       next: (bookings) => {
         this.roomOptions = bookings.map((b) => ({
-          label: `Room ${b.room_number}`,
-          value: b.room_number,
+          label: `Room ${b.room_num}`,
+          value: b.room_num,
         }));
       },
     });
@@ -98,7 +99,7 @@ export class ServiceRequestComponent {
     }
 
     const payload = {
-      room_number: this.selectedRoom.value,
+      room_num: this.selectedRoom.value,
       type: this.selectedType,
       details: this.requestDetails,
     };
@@ -106,11 +107,12 @@ export class ServiceRequestComponent {
     this.isLoading = true;
 
     this.roomService
-      .submitRequest(payload.room_number, payload.type, payload.details)
+      .submitRequest(payload.room_num, payload.type, payload.details)
       .subscribe({
-        next: () => {
+        next: (res) => {
           this.isLoading = false;
           this.requestDialogVisible = false;
+          console.log(res)
 
           this.selectedRoom = null;
           this.selectedType = '';

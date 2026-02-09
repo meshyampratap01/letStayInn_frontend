@@ -55,7 +55,7 @@ export class AdminComponent implements OnDestroy, OnInit {
 
   userName = this.authService.user()?.UserName as string;
   role = this.authService.user()?.Role as Roles;
-  userRole = Roles[this.role];
+  userRole = this.role;
 
   availableRooms: number = 0;
   occupiedRooms: number = 0;

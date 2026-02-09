@@ -1,10 +1,11 @@
 export enum Roles {
-  Invalid = 0,
-  GUEST = 1,
-  KITCHENSTAFF = 2,
-  CLEANINGSTAFF = 3,
-  MANAGER = 4,
+  Invalid = 'Invalid',
+  GUEST = 'Guest',
+  KITCHENSTAFF = 'KitchenStaff',
+  CLEANINGSTAFF = 'CleaningStaff',
+  MANAGER = 'Manager',
 }
+
 
 export type User = {
   ID: string;

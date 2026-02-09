@@ -14,6 +14,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
+import { Roles } from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -59,13 +60,14 @@ export class LoginComponent implements OnInit {
   login(form: NgForm) {
     this.loginClicked.set(true);
 
-    const roleRouteMap: { [key: number]: string } = {
-      4: '/admin',
-      2: '/employee',
-      3: '/employee',
-      1: '/guest',
-      0: '/login',
-    };
+  const roleRouteMap: Record<Roles, string> = {
+    [Roles.MANAGER]: '/admin',
+    [Roles.KITCHENSTAFF]: '/employee',
+    [Roles.CLEANINGSTAFF]: '/employee',
+    [Roles.GUEST]: '/guest',
+    [Roles.Invalid]: '/login',
+  };
+
 
     const loginSubscription = this.authService
       .login(this.email, this.password)
@@ -73,7 +75,7 @@ export class LoginComponent implements OnInit {
         next: () => {
           form.reset();
           const user = this.authService.user();
-          const userRole = user?.Role ?? 0;
+          const userRole: Roles = user?.Role ?? Roles.Invalid;
           this.router.navigate([roleRouteMap[userRole]]);
         },
         error: (err: any) => {

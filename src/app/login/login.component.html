@@ -50,7 +50,6 @@
           type="password"
           class="login-input"
           required
-          minlength="8"
           placeholder="Password"
           [(ngModel)]="password"
           name="password"
@@ -58,8 +57,8 @@
           (click)="inputClicked()"
         />
       </div>
-      <div>
-        <div
+      <!-- <div> -->
+        <!-- <div
           class="error-message"
           *ngIf="passwordRef.touched && passwordRef.invalid"
         >
@@ -69,12 +68,12 @@
           <small *ngIf="passwordRef.errors?.['minlength']"
             >Minimum 8 characters</small
           >
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <button
         type="submit"
-        [disabled]="form.invalid || loginClicked()"
-        [ngClass]="{ disabled: form.invalid || loginClicked() }"
+        [disabled]="(!email || !password) || loginClicked()"
+        [ngClass]="{ disabled: (!email || !password) || loginClicked() }"
         class="login-btn"
       >
         @if(loginClicked()){

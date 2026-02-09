@@ -119,7 +119,7 @@ export class RoomComponent {
       .subscribe({
         next: (res) => {
           this.isLoading = false;
-          if (res.code === 201) {
+          if (res.status_code === 201) {
             this.bookingService.getActiveBookings().subscribe();
             this.messageService.add({
               severity: 'success',
