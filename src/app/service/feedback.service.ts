@@ -48,10 +48,7 @@ export class FeedbackService {
 
   submitFeedback(newFeedback:feedback){
     const url = 'feedbacks';
-    return this.httpClient.post<response>(url,{
-      message: newFeedback.message,
-      rating: newFeedback.rating,
-    })
+    return this.httpClient.post<response>(url, newFeedback);
   }
 
   deleteFeedback(feedbackID: string){

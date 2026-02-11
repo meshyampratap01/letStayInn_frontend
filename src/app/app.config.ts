@@ -17,7 +17,6 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([
         BaseUrlInterceptor,
         AddJwtInterceptor,
-        loggingInterceptor,
       ])
     ),
     provideZoneChangeDetection({ eventCoalescing: true }),

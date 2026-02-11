@@ -12,7 +12,6 @@ import { MessageService } from 'primeng/api';
   imports: [RouterLink, FormsModule, CommonModule, ToastModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
-  providers: [MessageService]
 })
 export class SignupComponent {
   private authService = inject(AuthService);
@@ -49,7 +48,7 @@ export class SignupComponent {
             life: 3000
           });
 
-          this.router.navigate(['login']);
+          this.router.navigate(['/login']);
         },
         error: (err: any) => {
           this.signupClicked.set(false);
