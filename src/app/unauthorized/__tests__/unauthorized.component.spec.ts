@@ -42,7 +42,6 @@ describe('UnauthorizedComponent', () => {
 
   describe('routing links', () => {
     it('should have RouterLink imports', () => {
-      // Component imports RouterLink for navigation
       expect(UnauthorizedComponent).toBeTruthy();
     });
   });

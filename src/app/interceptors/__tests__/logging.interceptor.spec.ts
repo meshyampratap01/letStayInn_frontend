@@ -93,8 +93,6 @@ describe('LoggingInterceptor', () => {
 
   describe('note on logging implementation', () => {
     it('should have logging code available for future implementation', () => {
-      // The loggingInterceptor has the framework for logging but it's currently commented out
-      // This test confirms the interceptor exists and can be enhanced with logging
       expect(loggingInterceptor).toBeDefined();
     });
   });
